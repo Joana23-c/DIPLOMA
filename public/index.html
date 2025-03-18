@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+<style>
+    #contanier{
+        display: flex;
+        justify-content: center;
+    }
+    canvas{
+        position: absolute;
+    }
+    /* #test{
+        margin-top : 600px;
+    } */
+</style>
+<link rel="stylesheet" href="lab2.css"> 
+</head>
+<body>
+
+    <canvas id="canvas" style="display:none"></canvas>
+    <!-- <canvas id="canvas" ></canvas> -->
+    <div id="contanier">
+        <video id ="video-feed" height="560" width="720" style="display:none" autoplay></video>
+        <!-- <video id ="video-feed" height="560" width="720" autoplay></video>  -->
+    </div>
+
+
+    <div id="game">
+        <h2>Tic Tac Toe</h2>
+        <div id="status">Player turn: X</div>
+        <div id="cellContainer">
+        <table id="tb">
+        <tr>
+        <td data-index="0" class="cell"></td>
+        <td data-index="1" class="cell"></td>
+        <td data-index="2" class="cell"></td>
+        </tr>
+        <tr>
+        <td data-index="3" class="cell"></td>
+        <td data-index="4" class="cell"></td>
+        <td data-index="5" class="cell"></td>
+        </tr>
+        <tr>
+        <td data-index="6" class="cell"></td>
+        <td data-index="7" class="cell"></td>
+        <td data-index="8" class="cell"></td>
+        </tr>
+        </table>
+        </div>
+        <div id="parag">
+        <p id="state1">p1</p>
+        <p id="state2">p2</p></div>
+        <button id="reset" disabled>Luaj Përsëri</button>
+    </div>
+
+
+    <div id="test">
+        <!-- <p id="paragraf" style="display:none"  ></p> -->
+        <p id="paragraf"></p>
+    </div>
+    <script src="./face-api.min.js"></script>
+    <script src="./scripts.js"></script></body>
+</body>
+</html>
