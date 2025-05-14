@@ -3,6 +3,8 @@ let boardwidth = 750;
 let boardheight = 250;
 let context;
 
+
+
 const frameWidth = 100;
 const frameHeight = 64;
 const numFrames = 5;
@@ -34,16 +36,17 @@ let cactusy = boardheight - cactusheight;
 let cactus1img;
 let cactus2img;
 let cactus3img;
-let velocityx = -6;
+let velocityx = -4;
 let velocityy = 0;
 let gravity = 0.4;
 
 let gameover = false;
 let score = 0;
-
+let coins=0;
 let goldcoin;
 let goldcoinwidht = 30;
 let goldcoinheigh = 30;
+let silvercoin;
 
 window.onload = function() {
     board = document.getElementById("canvas");
@@ -65,6 +68,9 @@ window.onload = function() {
 
     goldcoin = new Image();
     goldcoin.src = "goldCoin.png"
+
+    silvercoin = new Image();
+    silvercoin.src = "silverCoin.png"
 
     requestAnimationFrame(update);
     setInterval(placecactus, 1000);
@@ -115,22 +121,61 @@ if (frame.y > framey) {
     for (let i = 0; i < cactusArray.length; i++) {
         let cactus = cactusArray[i];
         cactus.x += velocityx;
+         
         context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
 
-            if (detectCollision(frame,cactus)) {
-        gameover = true;
-        // dinoimg.src = "./img/dino-dead.png";
-        // dinoimg.onload = function() {
-        //     context.drawImage(dinoimg, dino.x, dino.y, dino.width, dino.height);
-        // }
-    }
+        if(detectCollision(frame,cactus)){
+            if(cactus.img != goldcoin && cactus.img != silvercoin)
+                gameover= true;
+            else if(cactus.img == goldcoin){
+                  gameover = false;
+            coins+=10;
+             cactusArray.splice(i, 1);
+               i--;
+            }else if(cactus.img == silvercoin){
+            gameover = false;
+            coins+=5;
+             cactusArray.splice(i, 1);
+               i--;
+            }
 
+        }
+/*
+         if (detectCollision(frame,cactus) && cactus.img != goldcoin && cactus.img != silvercoin ) {
+            gameover = true;
+        }
+        else if(detectCollision(frame,cactus) && cactus.img == goldcoin){
+            gameover = false;
+            coins+=10;
+             cactusArray.splice(i, 1);
+               i--;*/
+               /* vendos i-- sepse you remove the current cactus at index i. But right after that, your for loop automatically moves to the next index (i++ in the loop). This causes the loop to skip the next cactus.*/
+    /*    }   else if(detectCollision(frame,cactus) && cactus.img == silvercoin){
+            gameover = false;
+            coins+=5;
+             cactusArray.splice(i, 1);
+               i--;
+        }  
+*/
 
     // --- Draw score ---
     context.fillStyle = "white";
     context.font = "20px courier";
     score++;
     context.fillText(score, 5, 20);
+    /*x = 5: the horizontal position (5 pixels from the left edge).
+y = 20: the vertical position (20 pixels from the top). */
+
+    context.fillStyle = "black";
+    context.font = "20px courier";
+    context.fillText(coins, 700, 20);
+ }
+
+ if(coins == 20  || coins == 25){
+    velocityx = -5;
+ }
+  if(coins==55 || coins == 60){
+   velocityx = -6;
  }
 }
 
@@ -150,23 +195,28 @@ function placecactus() {
     };
 
     let placecactuschance = Math.random();
-    if (placecactuschance > 0.90) {
+    if (placecactuschance > 0.80) {
         cactus.img = cactus3img;
         cactus.width = cactus3width;
         cactus.height = cactusheight;
         cactusArray.push(cactus);
-    } else if (placecactuschance > 0.70) {
+    } else if (placecactuschance > 0.60) {
         cactus.img = cactus2img;
         cactus.width = cactus2width;
          cactus.height = cactusheight;
         cactusArray.push(cactus);
-    } else if (placecactuschance > 0.50) {
+    } else if (placecactuschance > 0.30) {
         cactus.img = cactus1img;
         cactus.width = cactus1width;
          cactus.height = cactusheight;
         cactusArray.push(cactus);
-    }else if(placecactuschance > 0.40){
+    }else if(placecactuschance > 0.20){
         cactus.img = goldcoin;
+        cactus.width = goldcoinwidht;
+        cactus.height = goldcoinheigh;
+        cactusArray.push(cactus);
+    }else if(placecactuschance > 0.10){
+        cactus.img = silvercoin;
         cactus.width = goldcoinwidht;
         cactus.height = goldcoinheigh;
         cactusArray.push(cactus);
@@ -183,20 +233,16 @@ function movesailor(e){
     if(gameover){
         return;
     }
-
     //nese eshte klipuar space ose arrowup dhe pozicioni vertikal i dino eshte ne pozicionin default (pra toke) mund te bej jump
     if((e.code == "Space" || e.code == "ArrowUp") && frame.y==groundY ){
         //jump
         velocityy = -11; //dmth e bej te ngjitet 10 njesi lart dhe vizatoj dizaurin 
-    }else if((e.code == "Enter")){
-
     }
-    /* else if(e.code =="ArrowDown"){} */
 }
 
 //perplasje, mbivendosje
 function detectCollision(a, b) {
-    return a.x < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner
+    return a.x+40 < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner This creates a tolerance or buffer zone of 40 pixels. a can be up to 40 pixels into b (from the right side) and still not be considered a collision.
            a.x + a.width > b.x+30 &&   //a's top right corner passes b's top left corner
            a.y< b.y + b.height  &&  //a's top left corner doesn't reach b's bottom left corner
            a.y + a.height > b.y ;    //a's bottom left corner passes b's top left corner
