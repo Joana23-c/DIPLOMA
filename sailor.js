@@ -48,6 +48,14 @@ let goldcoinwidht = 30;
 let goldcoinheigh = 30;
 let silvercoin;
 
+
+let isPaused = false;
+
+let jumpSound = new Audio("jump1.ogg");
+let coinSound = new Audio("coinsong.wav");
+let gameOverSound = new Audio("gameover.wav");
+
+
 window.onload = function() {
     board = document.getElementById("canvas");
     board.height = boardheight;
@@ -76,6 +84,9 @@ window.onload = function() {
     setInterval(placecactus, 1000);
 
     document.addEventListener("keydown", movesailor); 
+    document.getElementById("pauseBtn").addEventListener("click", togglePause);
+    document.getElementById("playBtn").addEventListener("click", togglePlay);
+
 
 };
 
@@ -85,6 +96,7 @@ function update(timestamp) {
     if (gameover) {
         return;
     }
+    if (isPaused) return;
 
     context.clearRect(0, 0, board.width, board.height);
 
@@ -125,15 +137,19 @@ if (frame.y > framey) {
         context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
 
         if(detectCollision(frame,cactus)){
-            if(cactus.img != goldcoin && cactus.img != silvercoin)
+            if(cactus.img != goldcoin && cactus.img != silvercoin){
                 gameover= true;
-            else if(cactus.img == goldcoin){
-                  gameover = false;
+                        gameOverSound.currentTime = 0; 
+                        gameOverSound.play();
+            }else if(cactus.img == goldcoin){
+                    coinSound.currentTime = 0; 
+                    coinSound.play();      
             coins+=10;
              cactusArray.splice(i, 1);
                i--;
             }else if(cactus.img == silvercoin){
-            gameover = false;
+                coinSound.currentTime = 0; 
+                    coinSound.play(); 
             coins+=5;
              cactusArray.splice(i, 1);
                i--;
@@ -237,6 +253,8 @@ function movesailor(e){
     if((e.code == "Space" || e.code == "ArrowUp") && frame.y==groundY ){
         //jump
         velocityy = -11; //dmth e bej te ngjitet 10 njesi lart dhe vizatoj dizaurin 
+        jumpSound.currentTime = 0; // rewind if still playing
+        jumpSound.play();
     }
 }
 
@@ -248,3 +266,11 @@ function detectCollision(a, b) {
            a.y + a.height > b.y ;    //a's bottom left corner passes b's top left corner
            //Nëse të gjitha janë true, ka përplasje!
 }
+
+function togglePause() {
+    isPaused = true;
+    console.log("pause");
+}
+function togglePlay() {
+    isPaused = false;
+     console.log("play");}

@@ -1,25 +1,52 @@
+/* body, canvas {
+    cursor: url("cursor-o.png"), auto;
+} */
+
 body{ 
     font-family:'Courier New', Courier, monospace;
    text-align: center;
-   background-image: url("Purple_Nebula_01-1024x1024.png");
+   background-image: url("Purple_Nebula_01-1024x1024.png");  
+
+}
+#pauseBtn{
+   transform: scale(0.6);
+   position: fixed;
+   top:90px;
+   left:60px
+}
+#playBtn{
+  transform: scale(1.1);
+   position: fixed;
+   top:107px;
+   left:115px
 }
 
+#quitBtn{
+  transform: scale(0.55);
+   position: fixed;
+   top:90px;
+   left:140px
+}
+#canvas{
+     background-image : url("image.png");
+     background-position: center;
+     background-position: no-repeat;
+       background-size: cover;
+}
 @media (min-width: 980px) {
   #canvas{
     /* background: #222; */
+ 
     margin-top : 25vh;
-    background: wheat;
+ 
     transform: scale(1.3);
-
-           
+  
 }
 }
 @media (max-width: 979px) {
     #canvas{
-    /* background: #222; */
     width: 90vw;
     margin-top : 25vh;
-    background: wheat;
      
     }
 }
