@@ -4,7 +4,6 @@ let boardheight = 250;
 let context;
 
 
-
 const frameWidth = 100;
 const frameHeight = 64;
 const numFrames = 5;
@@ -55,12 +54,17 @@ let jumpSound = new Audio("jump1.ogg");
 let coinSound = new Audio("coinsong.wav");
 let gameOverSound = new Audio("gameover.wav");
 
+let replayBtn;
+let replayVisible = false;
+
 
 window.onload = function() {
     board = document.getElementById("canvas");
     board.height = boardheight;
     board.width = boardwidth;
     context = board.getContext("2d");
+    replayBtn = document.getElementById("hidden");
+    hideReplayBtn(replayVisible);
 
     sprite = new Image();
     sprite.src = 'Walking_KG_2.png';
@@ -86,7 +90,7 @@ window.onload = function() {
     document.addEventListener("keydown", movesailor); 
     document.getElementById("pauseBtn").addEventListener("click", togglePause);
     document.getElementById("playBtn").addEventListener("click", togglePlay);
-
+    replayBtn.addEventListener("click", LuajPerseri);
 
 };
 
@@ -94,10 +98,12 @@ function update(timestamp) {
     requestAnimationFrame(update);
 
     if (gameover) {
+        replayVisible = true;
+        hideReplayBtn(replayVisible);
         return;
     }
     if (isPaused) return;
-
+    
     context.clearRect(0, 0, board.width, board.height);
 
     velocityy += gravity; 
@@ -139,8 +145,10 @@ if (frame.y > framey) {
         if(detectCollision(frame,cactus)){
             if(cactus.img != goldcoin && cactus.img != silvercoin){
                 gameover= true;
-                        gameOverSound.currentTime = 0; 
-                        gameOverSound.play();
+                gameOverSound.currentTime = 0; 
+                gameOverSound.play();
+                replayVisible = true;
+                hideReplayBtn(replayVisible);
             }else if(cactus.img == goldcoin){
                     coinSound.currentTime = 0; 
                     coinSound.play();      
@@ -184,7 +192,7 @@ y = 20: the vertical position (20 pixels from the top). */
 
     context.fillStyle = "black";
     context.font = "20px courier";
-    context.fillText(coins, 700, 20);
+    context.fillText(coins, 700, 20); 
  }
 
  if(coins == 20  || coins == 25){
@@ -199,6 +207,8 @@ let lastFrameTime = 0;
 
 function placecactus() {
     if (gameover) {
+          replayVisible = true;
+        hideReplayBtn(replayVisible);
         return;
     }
 
@@ -242,7 +252,6 @@ function placecactus() {
         cactusArray.shift();
     }
 }
-
 //funksioni per jump
 function movesailor(e){
     //nese eshte gameover true dmth ti ke humb nuk mund te hidhesh me 
@@ -274,3 +283,23 @@ function togglePause() {
 function togglePlay() {
     isPaused = false;
      console.log("play");}
+
+     function hideReplayBtn( visible) {
+        if (!visible) {
+            replayBtn.style.display = 'none'; // fsheh section-in
+        } else {
+            replayBtn.style.display = 'block'; // Shfaq section-in
+        }
+    }
+
+   function LuajPerseri(){
+    score=0;
+    coins=0;
+     velocityx = -4;
+    replayVisible = false;
+    hideReplayBtn(replayVisible);
+    for(let i=0;i<5;i++){
+        cactusArray.pop();
+    }
+    gameover=false;
+   }

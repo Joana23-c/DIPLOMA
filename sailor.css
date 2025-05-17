@@ -12,13 +12,15 @@ body{
    transform: scale(0.6);
    position: fixed;
    top:90px;
-   left:60px
+   left:60px;
+   cursor : pointer;
 }
 #playBtn{
   transform: scale(1.1);
    position: fixed;
    top:107px;
-   left:115px
+   left:115px;
+   cursor: pointer;
 }
 
 #quitBtn{
@@ -50,3 +52,33 @@ body{
      
     }
 }
+#hidden{
+  position: fixed;
+  margin-top:40px;
+  margin-left:45%;
+  margin-right:50%;
+}
+#hidden button{
+  color: #430891;
+ background-color: rgb(203, 203, 203);
+  font-family: "press Start 2P";
+  font-style: normal;
+  border-radius: 10px;
+  border:none;
+  box-shadow: 5px 5px 15px rgba(225, 118, 235, 0.3);
+  cursor: pointer;
+  overflow: hidden;
+   transform: scale(1.2);
+   animation: pulse 2s infinite;
+}
+ @keyframes pulse {
+  0% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+   transform: scale(1.2);
+  }
+ }
