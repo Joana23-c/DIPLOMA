@@ -50,9 +50,9 @@ let silvercoin;
 
 let isPaused = false;
 
-let jumpSound = new Audio("jump1.ogg");
-let coinSound = new Audio("coinsong.wav");
-let gameOverSound = new Audio("gameover.wav");
+let jumpSound = new Audio("./sounds/jump1.ogg");
+let coinSound = new Audio("./sounds/coinsong.wav");
+let gameOverSound = new Audio("./sounds/gameover.wav");
 
 let replayBtn;
 let replayVisible = false;
@@ -67,22 +67,22 @@ window.onload = function() {
     hideReplayBtn(replayVisible);
 
     sprite = new Image();
-    sprite.src = 'Walking_KG_2.png';
+    sprite.src = './images/Walking_KG_2.png';
 
     cactus1img = new Image();
-    cactus1img.src = "canyon_rock1.png";
+    cactus1img.src = "./images/canyon_rock1.png";
 
     cactus2img = new Image();
-    cactus2img.src = "canyon_rock1.png";
+    cactus2img.src = "./images/canyon_rock1.png";
 
     cactus3img = new Image();
-    cactus3img.src = "canyon_rock2.png";
+    cactus3img.src = "./images/canyon_rock2.png";
 
     goldcoin = new Image();
-    goldcoin.src = "goldCoin.png"
+    goldcoin.src = "./images/goldCoin.png"
 
     silvercoin = new Image();
-    silvercoin.src = "silverCoin.png"
+    silvercoin.src = "./images/silverCoin.png"
 
     requestAnimationFrame(update);
     setInterval(placecactus, 1000);

@@ -1,0 +1,178 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  overflow: hidden;
+  transform: scale(1.1);
+}
+
+.container {
+  font-size: 6px;
+  width: 40em;
+  height: 40em;
+  position: relative;
+}
+
+.sun {
+  position: absolute;
+  top: 14em;
+  left: 14.5em;
+  width: 12em;
+  height: 13em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.sun img {
+  height: 145%;
+  width: 145%;
+}
+
+/* Orbit containers */
+.mercury, 
+.venus, 
+.earth, 
+.mars,
+.jupiter,
+ .saturn, 
+ .uranus,
+.neptune,
+ .pluto {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none; /* Disable clicks on orbit paths */
+}
+
+/* Planet links */
+.planet-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, 0);
+  pointer-events: auto; /* Enable clicks on planets */
+  display: block;
+}
+
+/* Orbit animations and sizes */
+.mercury {
+  top: 10.5em;
+  left: 11em;
+  width: 19em;
+  height: 19em;
+  animation: orbit 68.7s linear infinite;
+}
+
+.venus {
+  top: 8em;
+  left: 8.5em;
+  width: 24em;
+  height: 24em;
+  animation: orbit 48.7s linear infinite;
+}
+
+.earth {
+  top: 4em;
+  left: 4.55em;
+  width: 32em;
+  height: 32em;
+  animation: orbit 36.5s linear infinite;
+}
+
+.moon {
+  position: absolute;
+  top: 0em;
+  right:27em;
+  width: 6em;
+  height: 6em;
+  animation: orbit 2.7s linear infinite;
+}
+
+.mars {
+  top: 1em;
+  left: 1em;
+  width: 41em;
+  height: 41em;
+  animation: orbit 26.5s linear infinite;
+}
+
+.jupiter {
+  top: -8em;
+  left: -5em;
+  width: 52em;
+  height: 52em;
+  animation: orbit 21s linear infinite;
+}
+
+.saturn {
+  top: -10em;
+  left: -19em;
+  width: 72em;
+  height: 72em;
+  animation: orbit 17s linear infinite;
+}
+
+.uranus {
+  top: -14em;
+  left: -23.5em;
+  width: 87em;
+  height: 87em;
+  animation: orbit 19s linear infinite;
+}
+
+.neptune {
+  top: -18em;
+  left: -29.5em;
+  width: 99em;
+  height: 99em;
+  animation: orbit 15s linear infinite;
+}
+
+.pluto {
+  top: -18em;
+  left: -35em;
+  width: 110em;
+  height: 110em;
+  animation: orbit 18s linear infinite;
+}
+
+/* Planet images */
+.mercury img, .venus img, .earth img,
+.moon img, .mars img, .jupiter img,
+.saturn img, .uranus img, .neptune img,
+.pluto img {
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: auto; /* Ensure images are clickable */
+}
+
+/* Individual planet sizes */
+.jupiter img { width: 9em; height: 9em; }
+.saturn img { width: 8em; height: 8em; }
+.uranus img { width: 6em; height: 6em; }
+.neptune img { width: 6em; height: 6em; }
+.pluto img { width: 4em; height: 4em; }
+.earth img { width: 5em; height: 5em; }
+.venus img { width: 4em; height: 4em; }
+.mercury img { width: 3em; height: 3em; }
+.mars img { width: 3em; height: 3em; }
+.moon img { width: 1.2em; height: 1.2em; }
+
+.stars {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}

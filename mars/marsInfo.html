@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars</title>
+      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+          <link rel="icon" type="image/x-icon" href="./images/marsIcon.png">
+
+     <style>
+       body{
+       width: 100vw; 
+       height: 100vh;
+        background-image: url("./images/Purple_Nebula_01-1024x1024.png");
+        font-family:'press Start 2P', Courier, monospace;
+        color: #32CD32;
+    }
+    a{
+        text-decoration: none;
+        color:  #32CD32;
+    }
+
+    h1{ 
+        text-align:center;
+        font-size:30px;
+        text-shadow:5px 5px 10px rgba(44, 162, 33, 0.975);
+        margin-top: 40px;
+    }
+      /*Paketat*/
+        .infoboxs{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3%;
+            justify-content: center;
+            margin-left: 15px;
+            margin-right: 15px;
+            
+
+        }
+        .box {
+            background: #ffffff;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgb(0, 0, 0);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.2s ease;
+            background-color: transparent;
+            backdrop-filter: blur(2px);
+            margin-top: 15px;
+            float: left;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+        }
+
+        .box-image {
+            height: 170px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f9f9f9;
+        }
+
+        .box-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .box-content {
+            padding: 16px;
+            text-align: center;
+        }
+
+
+        h3 {
+            margin: 0 0 10px 0;
+            color: #32CD32;
+            font-size: 12px;
+        }
+
+
+        .infoBtn {
+            display: inline-block;
+            background: none;
+            color: white;
+            border: 1px solid  #32CD32;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            
+        }
+
+        /* stilizimi  i shopping cart */
+        .infoBtn:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+    .info {
+           font-family: Arial, sans-serif;
+      padding: 40px;
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.718);
+    }
+    
+ .info-content {
+  background-image: url("./images/Purple_Nebula_01-1024x1024.png");
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+    .close-btn {
+      background-color: transparent;
+      color: white;
+      border: none;
+     margin-bottom: -10%;
+      margin-left:270px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+      </style>
+</head>
+<body>
+      <a href="../mars/MarsSailorGirl.html"><h1>Planeti Mars</h1></a>
+    <section id="infoboxs" class="infoboxs">
+        
+    <div class="box" id="infobox1">
+        <div class="box-image" >
+            <img src="./images/mars-thumbnail-fb84d10.jpg" >
+        </div>
+        <div class="box-content">
+            <h3>Një njohje kalimtare</h3>
+            <a  class="infoBtn" id="infoBtn1">Mëso →</a>
+        </div>
+    </div>
+      <div id="info1" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo1"><img src="./images/crossred.png"></button> 
+         
+         <p>Marsi,planeti i katërt nga Dielli,është një botë me pluhur, e ftohtë dhe shkretëtirë me një atmosferë shumë të hollë. Ky planet dinamik ka stinë, akullnaja polare, vullkane të shuar, kanione dhe mot.</p>
+         </div>
+  </div>
+
+
+    <div class="box" id="infobox2">
+        <div class="box-image" >
+            <img src="./images/tsRQNTJ8MhRUm32taXTdjm.jpg" >
+        </div>
+        <div class="box-content">
+            <h3>Planeti më i eksploruar</h3>
+            <a  class="infoBtn" id="infoBtn2">Mëso →</a>
+        </div>
+    </div>
+      <div id="info2" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo2"><img src="./images/crossred.png"></button> 
+         
+         <p>Marsi është një nga trupat më të eksploruar në sistemin tonë diellor dhe është i vetmi planet ku kemi dërguar robotë për të eksploruar në peizazhin alien.</p>
+         </div>
+  </div>
+
+    <div class="box" id="infobox3">
+        <div class="box-image" >
+            <img src="./images/three-aliens-discovered-new-planet-vector.jpg" >
+        </div>
+        <div class="box-content">
+            <h3>A ka jetë?</h3>
+            <a  class="infoBtn" id="infoBtn3">Mëso →</a>
+        </div>
+    </div>
+      <div id="info3" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo3"><img src="./images/crossred.png"></button> 
+         
+         <p>Mjedisi i Uranit <b>nuk është i favorshëm </b>për jetën siç e njohim ne.<br> Temperaturat, presionet dhe materialet që karakterizojnë këtë planet janë me shumë gjasa shumë ekstreme dhe të paqëndrueshme për t'u përshtatur me to organizmat.</p>
+         </div>
+  </div>
+
+    <div class="box" id="infobox4">
+        <div class="box-image" >
+            <img src="./images/images.jpg" >
+        </div>
+        <div class="box-content">
+            <h3>Madhësia dhe Distanca</h3>
+            <a  class="infoBtn" id="infoBtn4">Mëso →</a>
+        </div>
+    </div>
+      <div id="info4" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo4"><img src="./images/crossred.png"></button> 
+         
+         <p>Urani është katër herë më i gjerë se Toka.<br>Ai ka një diametër ekuatorial prej 51,118 kilometrash<br><br>Urani është rreth 19 njësi astronomike larg Diellit, rreth 2.9 miliardë kilometra.</p>
+         </div>
+  </div>
+
+
+    <div class="box" id="infobox5">
+        <div class="box-image" >
+            <img src="./images/pF5M3ZuwJEdp2tRK825TET.jpg" >
+        </div>
+        <div class="box-content">
+            <h3>28 Hënat</h3>
+            <a  class="infoBtn" id="infoBtn5">Mëso →</a>
+        </div>
+    </div>
+      <div id="info5" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo5"><img src="./images/crossred.png"></button> 
+         
+         <p>Urani ka 28 hëna të njohura.<br>5 emrat e hënave kryesore janë: Miranda, Ariel, Umbriel, Titania dhe Oberon.<br><br>Hënat e Uranit ndahen në tre grupe: 13 hëna të brendshme, 5 hëna të mëdha dhe 10 hëna të parregullta.</p>
+         </div>
+  </div>
+
+    <div class="box" id="infobox6">
+        <div class="box-image" >
+            <img src="./images/uranus_rings_voyager2-flyby_mystery-solved_1m.jpg" >
+        </div>
+        <div class="box-content">
+            <h3>13 Unazat e Uranit</h3>
+            <a  class="infoBtn" id="infoBtn6">Mëso →</a>
+        </div>
+    </div>
+      <div id="info6" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo6"><img src="./images/crossred.png"></button> 
+         
+         <p><b>Urani ka dy grupe unazash.</b><br><b>Sistemi i brendshëm</b> prej 9 unazash përbëhet kryesisht nga unaza të ngushta, gri të errëta.<br>Ekzistojnë 2 unaza të jashtme: ajo më e brendshme është e kuqërremtë si unaza me pluhur diku tjetër në sistemin diellor, dhe unaza e jashtme është blu si unaza E e Saturnit.<br>Në rend të rritjes së distancës nga planeti, unazat quhen Zeta, 6, 5, 4, Alfa, Beta, Eta, Gama, Delta, Lambda, Epsilon, Nu dhe Mu.</p>
+         </div>
+  </div>
+
+    <div class="box" id="infobox7">
+        <div class="box-image" >
+            <img src="./images/1920x1080.jpg" >
+        </div>
+        <div class="box-content">
+            <h3>Struktura</h3>
+            <a  class="infoBtn" id="infoBtn7">Mëso →</a>
+        </div>
+    </div>
+      <div id="info7" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo7"><img src="./images/crossred.png"></button> 
+         
+         <p><b>Urani është një nga dy gjigantët e akullit në sistemin diellor të jashtëm</b><br>Pjesa më e madhe (80% ose më shumë) e masës së planetit përbëhet nga një lëng i nxehtë dhe i dendur me materiale "të akullta" - ujë, metan dhe amoniak - mbi një bërthamë të vogël shkëmbore.<br> Pranë bërthamës, ai nxehet deri në 4,982 gradë Celsius.<br><br>Urani është planeti i dytë më pak i dendur;<br><br>Urani merr ngjyrën e tij blu-jeshile nga gazi metan në atmosferë. Drita e diellit kalon nëpër atmosferë dhe reflektohet përsëri nga majat e reve të Uranit. Gazi metan thith pjesën e kuqe të dritës, duke rezultuar në një ngjyrë blu-jeshile.</p>
+         </div>
+  </div>
+
+
+</section>
+    
+    <script src="../urani/uraniScript.js"></script>
+</body>
+</html>

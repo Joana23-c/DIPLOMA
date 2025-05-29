@@ -5,7 +5,7 @@
 body{ 
     font-family:'Courier New', Courier, monospace;
    text-align: center;
-   background-image: url("Purple_Nebula_01-1024x1024.png");  
+   background-image: url("./images/Purple_Nebula_01-1024x1024.png");  
 
 }
 #pauseBtn{
@@ -30,7 +30,7 @@ body{
    left:140px
 }
 #canvas{
-     background-image : url("image.png");
+     background-image : url("./images/image.png");
      background-position: center;
      background-position: no-repeat;
        background-size: cover;
