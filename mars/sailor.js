@@ -53,6 +53,7 @@ let isPaused = false;
 let jumpSound = new Audio("./sounds/jump1.ogg");
 let coinSound = new Audio("./sounds/coinsong.wav");
 let gameOverSound = new Audio("./sounds/gameover.wav");
+let win = new Audio("./sounds/win.wav");
 
 let replayBtn;
 let replayVisible = false;
@@ -200,6 +201,15 @@ y = 20: the vertical position (20 pixels from the top). */
  }
   if(coins==55 || coins == 60){
    velocityx = -6;
+ }
+ 
+ if(coins >= 150){
+    context.fillStyle = "red";
+    context.font = "25px courier";
+    context.fillText("Ti fitove !", 300, 125);
+    win.currentTime = 0; 
+    win.play();
+    gameover=true;
  }
 }
 
