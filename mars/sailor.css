@@ -29,6 +29,40 @@ body{
    top:90px;
    left:140px
 }
+#shpjegimBtn{
+  position: fixed;
+   top:107px;
+   left:195px
+}
+.info {
+   display: none;
+}
+    
+ .info-content {
+  /* background-image: url("./images/Blue_Nebula_04-1024x1024.png"); */
+  background-color: rgba(255, 255, 255, 0.726);
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -68%);
+}
+
+    .close-btn {
+      background-color: transparent;
+      color: white;
+      border: none;
+     margin-bottom: -10%;
+      margin-left:270px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+
 #canvas{
      background-image : url("./images/image.png");
      background-position: center;

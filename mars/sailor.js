@@ -91,6 +91,7 @@ window.onload = function() {
     document.addEventListener("keydown", movesailor); 
     document.getElementById("pauseBtn").addEventListener("click", togglePause);
     document.getElementById("playBtn").addEventListener("click", togglePlay);
+    document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
     replayBtn.addEventListener("click", LuajPerseri);
 
 };
@@ -288,11 +289,24 @@ function detectCollision(a, b) {
 
 function togglePause() {
     isPaused = true;
-    console.log("pause");
+    // console.log("pause");
 }
 function togglePlay() {
     isPaused = false;
-     console.log("play");}
+    //  console.log("play");
+    }
+function shpjegime(){
+   const info1 = document.getElementById("info1"); 
+ document.getElementById("shpjegimBtn").onclick = () => {
+    console.log("x");
+   togglePause(); 
+  info1.style.display = "block";
+   
+};
+   document.getElementById("closeInfo1").onclick = () => {info1.style.display = "none";
+    togglePlay();
+   }
+}
 
      function hideReplayBtn( visible) {
         if (!visible) {
@@ -312,4 +326,4 @@ function togglePlay() {
         cactusArray.pop();
     }
     gameover=false;
-   }
+   } 

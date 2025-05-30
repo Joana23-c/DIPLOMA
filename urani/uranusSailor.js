@@ -116,6 +116,8 @@ window.onload = function() {
     document.addEventListener("keydown", movesailor); 
     document.getElementById("pauseBtn").addEventListener("click", togglePause);
     document.getElementById("playBtn").addEventListener("click", togglePlay);
+    document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
+
     replayBtn.addEventListener("click", LuajPerseri);
 
 }
@@ -361,10 +363,13 @@ function placepengesa() {
 function togglePause() {
     isPaused = true;
     console.log("pause");
+    pengesaArr.length = 0;
 }
 function togglePlay() {
     isPaused = false;
-     console.log("play");}
+     console.log("play");
+    pengesaArr.length = 0;
+}
 
      function hideReplayBtn( visible) {
         if (!visible) {
@@ -385,6 +390,19 @@ function togglePlay() {
     }
     gameover=false;
    }
+
+   function shpjegime(){
+   const info1 = document.getElementById("info1"); 
+ document.getElementById("shpjegimBtn").onclick = () => {
+    console.log("x");
+   togglePause(); 
+  info1.style.display = "block";
+   
+};
+   document.getElementById("closeInfo1").onclick = () => {info1.style.display = "none";
+    togglePlay();
+   }
+}
     // document.addEventListener("keydown", movesailor); 
 
     // sailor.onload = function () {
