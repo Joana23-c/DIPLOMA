@@ -24,17 +24,17 @@ let currentFrame = 0;
 let frameTimer = 0;
 const frameInterval = 150; // ms per frame
 
-let cactusArray = [];
-let cactus1width = 40;
-let cactus2width = 69;
-let cactus3width = 70;
-let cactusheight = 80;
-let cactusx = 700;
-let cactusy = boardheight - cactusheight;
+let pengesaArray = [];
+let pengesa1width = 40;
+let pengesa2width = 69;
+let pengesa3width = 70;
+let pengesaheight = 80;
+let pengesax = 700;
+let pengesay = boardheight - pengesaheight;
 
-let cactus1img;
-let cactus2img;
-let cactus3img;
+let pengesa1img;
+let pengesa2img;
+let pengesa3img;
 let velocityx = -4;
 let velocityy = 0;
 let gravity = 0.4;
@@ -70,14 +70,14 @@ window.onload = function() {
     sprite = new Image();
     sprite.src = './images/Walking_KG_2.png';
 
-    cactus1img = new Image();
-    cactus1img.src = "./images/canyon_rock1.png";
+    pengesa1img = new Image();
+    pengesa1img.src = "./images/canyon_rock1.png";
 
-    cactus2img = new Image();
-    cactus2img.src = "./images/canyon_rock1.png";
+    pengesa2img = new Image();
+    pengesa2img.src = "./images/canyon_rock1.png";
 
-    cactus3img = new Image();
-    cactus3img.src = "./images/canyon_rock2.png";
+    pengesa3img = new Image();
+    pengesa3img.src = "./images/canyon_rock2.png";
 
     goldcoin = new Image();
     goldcoin.src = "./images/goldCoin.png"
@@ -86,7 +86,7 @@ window.onload = function() {
     silvercoin.src = "./images/silverCoin.png"
 
     requestAnimationFrame(update);
-    setInterval(placecactus, 1000);
+    setInterval(placepengesa, 1000);
 
     document.addEventListener("keydown", movesailor); 
     document.getElementById("pauseBtn").addEventListener("click", togglePause);
@@ -137,49 +137,49 @@ if (frame.y > framey) {
 
     lastFrameTime = timestamp;
 
-    // --- Draw cactuses ---
-    for (let i = 0; i < cactusArray.length; i++) {
-        let cactus = cactusArray[i];
-        cactus.x += velocityx;
+    // --- Draw pengesaes ---
+    for (let i = 0; i < pengesaArray.length; i++) {
+        let pengesa = pengesaArray[i];
+        pengesa.x += velocityx;
          
-        context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
+        context.drawImage(pengesa.img, pengesa.x, pengesa.y, pengesa.width, pengesa.height);
 
-        if(detectCollision(frame,cactus)){
-            if(cactus.img != goldcoin && cactus.img != silvercoin){
+        if(detectCollision(frame,pengesa)){
+            if(pengesa.img != goldcoin && pengesa.img != silvercoin){
                 gameover= true;
                 gameOverSound.currentTime = 0; 
                 gameOverSound.play();
                 replayVisible = true;
                 hideReplayBtn(replayVisible);
-            }else if(cactus.img == goldcoin){
+            }else if(pengesa.img == goldcoin){
                     coinSound.currentTime = 0; 
                     coinSound.play();      
             coins+=10;
-             cactusArray.splice(i, 1);
+             pengesaArray.splice(i, 1);
                i--;
-            }else if(cactus.img == silvercoin){
+            }else if(pengesa.img == silvercoin){
                 coinSound.currentTime = 0; 
                     coinSound.play(); 
             coins+=5;
-             cactusArray.splice(i, 1);
+             pengesaArray.splice(i, 1);
                i--;
             }
 
         }
 /*
-         if (detectCollision(frame,cactus) && cactus.img != goldcoin && cactus.img != silvercoin ) {
+         if (detectCollision(frame,pengesa) && pengesa.img != goldcoin && pengesa.img != silvercoin ) {
             gameover = true;
         }
-        else if(detectCollision(frame,cactus) && cactus.img == goldcoin){
+        else if(detectCollision(frame,pengesa) && pengesa.img == goldcoin){
             gameover = false;
             coins+=10;
-             cactusArray.splice(i, 1);
+             pengesaArray.splice(i, 1);
                i--;*/
-               /* vendos i-- sepse you remove the current cactus at index i. But right after that, your for loop automatically moves to the next index (i++ in the loop). This causes the loop to skip the next cactus.*/
-    /*    }   else if(detectCollision(frame,cactus) && cactus.img == silvercoin){
+               /* vendos i-- sepse you remove the current pengesa at index i. But right after that, your for loop automatically moves to the next index (i++ in the loop). This causes the loop to skip the next pengesa.*/
+    /*    }   else if(detectCollision(frame,pengesa) && pengesa.img == silvercoin){
             gameover = false;
             coins+=5;
-             cactusArray.splice(i, 1);
+             pengesaArray.splice(i, 1);
                i--;
         }  
 */
@@ -216,51 +216,51 @@ y = 20: the vertical position (20 pixels from the top). */
 
 let lastFrameTime = 0;
 
-function placecactus() {
+function placepengesa() {
     if (gameover) {
           replayVisible = true;
         hideReplayBtn(replayVisible);
         return;
     }
 
-    let cactus = {
+    let pengesa = {
         img: null,
-        x: cactusx,
-        y: cactusy,
+        x: pengesax,
+        y: pengesay,
         width: null,
         height: null
     };
 
-    let placecactuschance = Math.random();
-    if (placecactuschance > 0.80) {
-        cactus.img = cactus3img;
-        cactus.width = cactus3width;
-        cactus.height = cactusheight;
-        cactusArray.push(cactus);
-    } else if (placecactuschance > 0.60) {
-        cactus.img = cactus2img;
-        cactus.width = cactus2width;
-         cactus.height = cactusheight;
-        cactusArray.push(cactus);
-    } else if (placecactuschance > 0.30) {
-        cactus.img = cactus1img;
-        cactus.width = cactus1width;
-         cactus.height = cactusheight;
-        cactusArray.push(cactus);
-    }else if(placecactuschance > 0.20){
-        cactus.img = goldcoin;
-        cactus.width = goldcoinwidht;
-        cactus.height = goldcoinheigh;
-        cactusArray.push(cactus);
-    }else if(placecactuschance > 0.10){
-        cactus.img = silvercoin;
-        cactus.width = goldcoinwidht;
-        cactus.height = goldcoinheigh;
-        cactusArray.push(cactus);
+    let placepengesachance = Math.random();
+    if (placepengesachance > 0.80) {
+        pengesa.img = pengesa3img;
+        pengesa.width = pengesa3width;
+        pengesa.height = pengesaheight;
+        pengesaArray.push(pengesa);
+    } else if (placepengesachance > 0.60) {
+        pengesa.img = pengesa2img;
+        pengesa.width = pengesa2width;
+         pengesa.height = pengesaheight;
+        pengesaArray.push(pengesa);
+    } else if (placepengesachance > 0.30) {
+        pengesa.img = pengesa1img;
+        pengesa.width = pengesa1width;
+         pengesa.height = pengesaheight;
+        pengesaArray.push(pengesa);
+    }else if(placepengesachance > 0.20){
+        pengesa.img = goldcoin;
+        pengesa.width = goldcoinwidht;
+        pengesa.height = goldcoinheigh;
+        pengesaArray.push(pengesa);
+    }else if(placepengesachance > 0.10){
+        pengesa.img = silvercoin;
+        pengesa.width = goldcoinwidht;
+        pengesa.height = goldcoinheigh;
+        pengesaArray.push(pengesa);
     }
 
-    if (cactusArray.length > 5) {
-        cactusArray.shift();
+    if (pengesaArray.length > 5) {
+        pengesaArray.shift();
     }
 }
 //funksioni per jump
@@ -290,10 +290,12 @@ function detectCollision(a, b) {
 function togglePause() {
     isPaused = true;
     // console.log("pause");
+    pengesaArray.length = 0;
 }
 function togglePlay() {
     isPaused = false;
     //  console.log("play");
+    pengesaArray.length = 0;
     }
 function shpjegime(){
    const info1 = document.getElementById("info1"); 
@@ -323,7 +325,7 @@ function shpjegime(){
     replayVisible = false;
     hideReplayBtn(replayVisible);
     for(let i=0;i<5;i++){
-        cactusArray.pop();
+        pengesaArray.pop();
     }
     gameover=false;
    } 
