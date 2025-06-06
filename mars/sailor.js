@@ -59,19 +59,32 @@ let win = new Audio("./sounds/win.wav");
 let replayBtn;
 let replayVisible = false;
 
+window.onload = function () { 
+       replayBtn = document.getElementById("hidden");
+        hideReplayBtn(replayVisible);
+        document.addEventListener("keydown", movesailor);
 
-window.onload = function () {
+        replayBtn.addEventListener("click", LuajPerseri);
+
+            document.getElementById("pauseBtn").addEventListener("click", togglePause);
+    document.getElementById("playBtn").addEventListener("click", togglePlay);
+    document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
+    document.getElementById("closeInfo1").addEventListener("click", () => {
+        document.getElementById("info1").style.display = "none";
+        togglePlay();
+    });
+
     // Fillo me Face API menjëherë
     run();
 
     // Prit 5 sekonda përpara se të nisë loja
     setTimeout(() => {
+      
         board = document.getElementById("canvas");
         board.height = boardheight;
         board.width = boardwidth;
         context = board.getContext("2d");
-        replayBtn = document.getElementById("hidden");
-        hideReplayBtn(replayVisible);
+
 
         sprite = new Image();
         sprite.src = './images/Walking_KG_2.png';
@@ -93,14 +106,12 @@ window.onload = function () {
 
         requestAnimationFrame(update);
         setInterval(placepengesa, 1000);
+  
 
-        document.addEventListener("keydown", movesailor);
-        document.getElementById("pauseBtn").addEventListener("click", togglePause);
-        document.getElementById("playBtn").addEventListener("click", togglePlay);
-        document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
-        replayBtn.addEventListener("click", LuajPerseri);
-    }, 2500); // 5 sekonda (5000ms)
-};
+    }, 3000); // 3 sekonda pritje per tu bere load face api 
+   
+
+}
 
  
 function update(timestamp) {
@@ -122,8 +133,7 @@ if (frame.y > framey) {
     frame.y = framey;
     velocityy = 0;
 }
-    // --- Draw sailor animation ---
-    // Use timestamp for smoother animation
+
     if (!lastFrameTime) lastFrameTime = timestamp;
     let deltaTime = timestamp - lastFrameTime;
     frameTimer += deltaTime;
@@ -144,7 +154,6 @@ if (frame.y > framey) {
 
     lastFrameTime = timestamp;
 
-    // --- Draw pengesaes ---
     for (let i = 0; i < pengesaArray.length; i++) {
         let pengesa = pengesaArray[i];
         pengesa.x += velocityx;
@@ -173,43 +182,23 @@ if (frame.y > framey) {
             }
 
         }
-/*
-         if (detectCollision(frame,pengesa) && pengesa.img != goldcoin && pengesa.img != silvercoin ) {
-            gameover = true;
-        }
-        else if(detectCollision(frame,pengesa) && pengesa.img == goldcoin){
-            gameover = false;
-            coins+=10;
-             pengesaArray.splice(i, 1);
-               i--;*/
-               /* vendos i-- sepse you remove the current pengesa at index i. But right after that, your for loop automatically moves to the next index (i++ in the loop). This causes the loop to skip the next pengesa.*/
-    /*    }   else if(detectCollision(frame,pengesa) && pengesa.img == silvercoin){
-            gameover = false;
-            coins+=5;
-             pengesaArray.splice(i, 1);
-               i--;
-        }  
-*/
 
-    // --- Draw score ---
     context.fillStyle = "white";
     context.font = "20px courier";
     score++;
     context.fillText(score, 5, 20);
-    /*x = 5: the horizontal position (5 pixels from the left edge).
-y = 20: the vertical position (20 pixels from the top). */
 
     context.fillStyle = "black";
     context.font = "20px courier";
     context.fillText(coins, 700, 20); 
  }
 
- if(coins == 20  || coins == 25){
-    velocityx = -5;
- }
-  if(coins==55 || coins == 60){
-   velocityx = -6;
- }
+//  if(coins == 20  || coins == 25){
+//     velocityx = -5;
+//  }
+//   if(coins==55 || coins == 60){
+//    velocityx = -6;
+//  }
  
  if(coins >= 150){
     context.fillStyle = "red";
@@ -296,26 +285,26 @@ function detectCollision(a, b) {
 
 function togglePause() {
     isPaused = true;
-    // console.log("pause");
+     console.log("pause");
     pengesaArray.length = 0;
 }
 function togglePlay() {
     isPaused = false;
-    //  console.log("play");
+      console.log("play");
     pengesaArray.length = 0;
     }
 function shpjegime(){
    const info1 = document.getElementById("info1"); 
  document.getElementById("shpjegimBtn").onclick = () => {
-    console.log("x");
-   togglePause(); 
-  info1.style.display = "block";
+      const info1 = document.getElementById("info1"); 
+    togglePause(); 
+    info1.style.display = "block";
    
-};
+}
    document.getElementById("closeInfo1").onclick = () => {info1.style.display = "none";
     togglePlay();
    }
-}
+};
 
      function hideReplayBtn( visible) {
         if (!visible) {
@@ -329,6 +318,8 @@ function shpjegime(){
     score=0;
     coins=0;
      velocityx = -4;
+     happyCount=0;
+     sadCount=0;
     replayVisible = false;
     hideReplayBtn(replayVisible);
     for(let i=0;i<5;i++){
@@ -340,13 +331,20 @@ function shpjegime(){
 
 
 const run = async()=>{
-    let happyCount = 0;
+let happyCount = 0;
 let sadCount = 0;
 let angryCount = 0;
 let neutralCount = 0;
 let fearfulCount = 0;
 let disgustedCount = 0;
 let surprisedCount = 0;
+let allhappyCount = 0;
+let allsadCount = 0;
+let allangryCount = 0;
+let allneutralCount = 0;
+let allfearfulCount = 0;
+let alldisgustedCount = 0;
+let allsurprisedCount = 0;
     
     const stream = await navigator.mediaDevices.getUserMedia({
         video:true,
@@ -424,9 +422,21 @@ let surprisedCount = 0;
                 surprisedCount++;
                 break;
         } 
+
         if(happyCount==10){
-            window.alert("ke be 10 happy");
+           velocityx = -5; 
+           console.log("ke be 10 happy");
             happyCount=0;
+        }
+        else if(happyCount==30){
+           velocityx = -6; 
+           console.log("ke be 30 happy");
+            happyCount=0;
+        }
+        else if(sadCount==5){
+           velocityx = -4; 
+           console.log("ke be 5 sad");
+            sadCount=0;
         }
         emotionText += `Emocion: ${topEmotion}<br>`;
      })
