@@ -1,3 +1,4 @@
+console.log(faceapi)
 let board;
 let boardwidth = 750;
 let boardheight = 250;
@@ -59,43 +60,49 @@ let replayBtn;
 let replayVisible = false;
 
 
-window.onload = function() {
-    board = document.getElementById("canvas");
-    board.height = boardheight;
-    board.width = boardwidth;
-    context = board.getContext("2d");
-    replayBtn = document.getElementById("hidden");
-    hideReplayBtn(replayVisible);
+window.onload = function () {
+    // Fillo me Face API menjëherë
+    run();
 
-    sprite = new Image();
-    sprite.src = './images/Walking_KG_2.png';
+    // Prit 5 sekonda përpara se të nisë loja
+    setTimeout(() => {
+        board = document.getElementById("canvas");
+        board.height = boardheight;
+        board.width = boardwidth;
+        context = board.getContext("2d");
+        replayBtn = document.getElementById("hidden");
+        hideReplayBtn(replayVisible);
 
-    pengesa1img = new Image();
-    pengesa1img.src = "./images/canyon_rock1.png";
+        sprite = new Image();
+        sprite.src = './images/Walking_KG_2.png';
 
-    pengesa2img = new Image();
-    pengesa2img.src = "./images/canyon_rock1.png";
+        pengesa1img = new Image();
+        pengesa1img.src = "./images/canyon_rock1.png";
 
-    pengesa3img = new Image();
-    pengesa3img.src = "./images/canyon_rock2.png";
+        pengesa2img = new Image();
+        pengesa2img.src = "./images/canyon_rock1.png";
 
-    goldcoin = new Image();
-    goldcoin.src = "./images/goldCoin.png"
+        pengesa3img = new Image();
+        pengesa3img.src = "./images/canyon_rock2.png";
 
-    silvercoin = new Image();
-    silvercoin.src = "./images/silverCoin.png"
+        goldcoin = new Image();
+        goldcoin.src = "./images/goldCoin.png";
 
-    requestAnimationFrame(update);
-    setInterval(placepengesa, 1000);
+        silvercoin = new Image();
+        silvercoin.src = "./images/silverCoin.png";
 
-    document.addEventListener("keydown", movesailor); 
-    document.getElementById("pauseBtn").addEventListener("click", togglePause);
-    document.getElementById("playBtn").addEventListener("click", togglePlay);
-    document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
-    replayBtn.addEventListener("click", LuajPerseri);
+        requestAnimationFrame(update);
+        setInterval(placepengesa, 1000);
 
+        document.addEventListener("keydown", movesailor);
+        document.getElementById("pauseBtn").addEventListener("click", togglePause);
+        document.getElementById("playBtn").addEventListener("click", togglePlay);
+        document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
+        replayBtn.addEventListener("click", LuajPerseri);
+    }, 2500); // 5 sekonda (5000ms)
 };
 
+ 
 function update(timestamp) {
     requestAnimationFrame(update);
 
@@ -242,12 +249,12 @@ function placepengesa() {
         pengesa.width = pengesa2width;
          pengesa.height = pengesaheight;
         pengesaArray.push(pengesa);
-    } else if (placepengesachance > 0.30) {
+    } else if (placepengesachance > 0.40) {
         pengesa.img = pengesa1img;
         pengesa.width = pengesa1width;
          pengesa.height = pengesaheight;
         pengesaArray.push(pengesa);
-    }else if(placepengesachance > 0.20){
+    }else if(placepengesachance > 0.30){
         pengesa.img = goldcoin;
         pengesa.width = goldcoinwidht;
         pengesa.height = goldcoinheigh;
@@ -283,7 +290,7 @@ function detectCollision(a, b) {
     return a.x+40 < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner This creates a tolerance or buffer zone of 40 pixels. a can be up to 40 pixels into b (from the right side) and still not be considered a collision.
            a.x + a.width > b.x+30 &&   //a's top right corner passes b's top left corner
            a.y< b.y + b.height  &&  //a's top left corner doesn't reach b's bottom left corner
-           a.y + a.height > b.y ;    //a's bottom left corner passes b's top left corner
+           a.y + a.height > b.y+30 ;    //a's bottom left corner passes b's top left corner
            //Nëse të gjitha janë true, ka përplasje!
 }
 
@@ -328,4 +335,101 @@ function shpjegime(){
         pengesaArray.pop();
     }
     gameover=false;
-   } 
+   }
+
+
+
+const run = async()=>{
+    let happyCount = 0;
+let sadCount = 0;
+let angryCount = 0;
+let neutralCount = 0;
+let fearfulCount = 0;
+let disgustedCount = 0;
+let surprisedCount = 0;
+    
+    const stream = await navigator.mediaDevices.getUserMedia({
+        video:true,
+        audio: false,
+
+    });
+    const videoFeedEl = document.getElementById('video-feed')
+    videoFeedEl.srcObject = stream
+    await Promise.all([
+        faceapi.nets.ssdMobilenetv1.loadFromUri('/face-api-js-starter-main/public/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('/face-api-js-starter-main/public/models'),
+        faceapi.nets.faceRecognitionNet.loadFromUri('/face-api-js-starter-main/public/models'),
+        faceapi.nets.ageGenderNet.loadFromUri('/face-api-js-starter-main/public/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('/face-api-js-starter-main/public/models')
+    ]);
+
+    const canvas = document.getElementById('canvasface');
+    const updateCanvasDimensions = () => {
+        canvas.style.left = `${videoFeedEl.offsetLeft}px`;
+        canvas.style.top = `${videoFeedEl.offsetTop}px`;
+        canvas.height = videoFeedEl.videoHeight;
+        canvas.width = videoFeedEl.videoWidth;
+    };
+
+    updateCanvasDimensions();
+
+    window.addEventListener('resize', updateCanvasDimensions);
+    
+
+    setInterval(async()=>{
+        let faceAIData = await faceapi.detectAllFaces(videoFeedEl)
+        .withFaceLandmarks()
+        .withFaceDescriptors()
+        .withAgeAndGender()
+        .withFaceExpressions();
+        console.log(faceAIData)
+
+        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
+        faceAIData = faceapi.resizeResults(faceAIData, videoFeedEl);
+
+    let emotionText = "";
+
+         faceAIData.forEach(face => {
+             const{age, gender, genderProbability} = face
+             const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
+         const ageText =`${Math.round(age)} vjec`
+        const textField = new faceapi.draw.DrawTextField(
+            [genderText, ageText],  // Text to display
+             face.detection.box.topRight // Position
+         )
+        const expressions = face.expressions;
+        const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
+        const topEmotion = sorted[0][0];
+
+        switch (topEmotion) {
+            case 'happy':
+                happyCount++;
+                break;
+            case 'sad':
+                sadCount++;
+                break;
+            case 'angry':
+                angryCount++;
+                break;
+            case 'neutral':
+                neutralCount++;
+                break;
+            case 'fearful':
+                fearfulCount++;
+                break;
+            case 'disgusted':
+                disgustedCount++;
+                break;
+            case 'surprised':
+                surprisedCount++;
+                break;
+        } 
+        if(happyCount==10){
+            window.alert("ke be 10 happy");
+            happyCount=0;
+        }
+        emotionText += `Emocion: ${topEmotion}<br>`;
+     })
+    },1000)
+} 
+ 

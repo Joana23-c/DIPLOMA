@@ -34,6 +34,13 @@ body{
    top:107px;
    left:195px
 }
+    #contanierface{
+        display: none;
+        justify-content: center;
+    }
+    #canvasface{
+        position: absolute;
+    }
 .info {
    display: none;
 }
