@@ -60,13 +60,13 @@ let replayBtn;
 let replayVisible = false;
 
 window.onload = function () { 
-       replayBtn = document.getElementById("hidden");
+    replayBtn = document.getElementById("hidden");
         hideReplayBtn(replayVisible);
-        document.addEventListener("keydown", movesailor);
+    document.addEventListener("keydown", movesailor);
 
-        replayBtn.addEventListener("click", LuajPerseri);
+    replayBtn.addEventListener("click", LuajPerseri);
 
-            document.getElementById("pauseBtn").addEventListener("click", togglePause);
+     document.getElementById("pauseBtn").addEventListener("click", togglePause);
     document.getElementById("playBtn").addEventListener("click", togglePlay);
     document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
     document.getElementById("closeInfo1").addEventListener("click", () => {
@@ -108,7 +108,7 @@ window.onload = function () {
         setInterval(placepengesa, 1000);
   
 
-    }, 3000); // 3 sekonda pritje per tu bere load face api 
+    }, 5000); // 3 sekonda pritje per tu bere load face api 
    
 
 }
@@ -426,18 +426,21 @@ let allsurprisedCount = 0;
         if(happyCount==10){
            velocityx = -5; 
            console.log("ke be 10 happy");
-            happyCount=0;
         }
         else if(happyCount==30){
            velocityx = -6; 
            console.log("ke be 30 happy");
             happyCount=0;
         }
-        else if(sadCount==5){
+        else if(sadCount==5 && velocityx!=-4){
            velocityx = -4; 
            console.log("ke be 5 sad");
             sadCount=0;
+            happyCount=0;
         }
+        // else if(fearfulCount==10){
+        //     window.alert("10 fearefull");
+        // }
         emotionText += `Emocion: ${topEmotion}<br>`;
      })
     },1000)

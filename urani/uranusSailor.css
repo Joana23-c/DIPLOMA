@@ -5,12 +5,29 @@ body{
    background-image: url("./images/Blue_Nebula_08-1024x1024.png");  
 
 }
+#controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 100; /* Higher than canvas */
+}
+
+#info1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    background: white;
+    padding: 20px;
+}
 #pauseBtn{
    transform: scale(0.6);
    position: fixed;
    top:90px;
    left:60px;
    cursor : pointer;
+    z-index: 100;
 }
 #playBtn{
   transform: scale(1.1);
@@ -18,23 +35,34 @@ body{
    top:107px;
    left:115px;
    cursor: pointer;
+    z-index: 100;
 }
 
 #quitBtn{
   transform: scale(0.55);
    position: fixed;
    top:90px;
-   left:140px
+   left:140px;
+   z-index: 100;
 }
 #shpjegimBtn{
   position: fixed;
    top:107px;
-   left:195px
+   left:195px;
+    z-index: 100;
 }
-.info {
+
+
+#contanierface{
+        display: none;
+        justify-content: center;
+    }
+#canvasface{
+        position: absolute;
+    }
+ .info {
    display: none;
-}
-    
+}   
  .info-content {
   background-color: rgba(255, 255, 255, 0.726);
   padding: 20px;
@@ -59,19 +87,7 @@ body{
     }
 
 #canvas{
-     /* background-image : url("./images/13924256_7Z_2104.w028.n002.57A.p15.57 (1).jpg"); */
-    
-     /* background-image : url("./images/rsz_4z_2104w028n00236bp3036.jpg"); */
-     
-     /* background-image : url("./images/2207_w026_n002_2268b_p1_2268.jpg"); */
-    
-     /* background-image : url("./images/2212.w026.n002.2827B.p1.2827.jpg"); */
-   /* background-image : url("./images/2303.w026.n002.3330B.p1.3330.jpg"); 
-      */
-
-       background-image : url("./images/13924256_7Z_2104.w028.n002.57A.p15.57 (1).jpg");  
-
-   
+    background-image : url("./images/13924256_7Z_2104.w028.n002.57A.p15.57 (1).jpg");  
      background-position: center;
      background-position: no-repeat;
      background-size: cover;

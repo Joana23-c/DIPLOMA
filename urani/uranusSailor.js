@@ -1,4 +1,5 @@
-    let canvas;
+   console.log(faceapi);
+   let canvas;
     let canvasWidth=750;
     let canvasHeight=250;
    let ctx;
@@ -74,16 +75,29 @@ let replayVisible = false;
 
 
 
-
 window.onload = function() {
 
+    replayBtn = document.getElementById("hidden");
+        hideReplayBtn(replayVisible);
+    document.addEventListener("keydown", movesailor);
+
+    replayBtn.addEventListener("click", LuajPerseri);
+
+    document.getElementById("pauseBtn").addEventListener("click", togglePause);
+    document.getElementById("playBtn").addEventListener("click", togglePlay);
+    document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
+    document.getElementById("closeInfo1").addEventListener("click", () => {
+        document.getElementById("info1").style.display = "none";
+        togglePlay();
+    });
+
+    run();
+     setTimeout(() => {
     canvas = document.getElementById('canvas');
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
     ctx = canvas.getContext('2d');
 
-    replayBtn = document.getElementById("hidden");
-    hideReplayBtn(replayVisible);
 
     sailor = new Image();
     
@@ -112,13 +126,7 @@ window.onload = function() {
 
     requestAnimationFrame(update);
       setInterval(placepengesa, 1000);
-
-    document.addEventListener("keydown", movesailor); 
-    document.getElementById("pauseBtn").addEventListener("click", togglePause);
-    document.getElementById("playBtn").addEventListener("click", togglePlay);
-    document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
-
-    replayBtn.addEventListener("click", LuajPerseri);
+     },5000);
 
 }
 
@@ -251,12 +259,12 @@ y = 20: the vertical position (20 pixels from the top). */
 
  }
 
- if(coins == 20  || coins == 25){
-    velocityx = -5;
- }
-  if(coins==55 || coins == 60){
-   velocityx = -6;
- }
+//  if(coins == 20  || coins == 25){
+//     velocityx = -5;
+//  }
+//   if(coins==55 || coins == 60){
+//    velocityx = -6;
+//  }
 
  if(coins == 300){
     ctx.fillStyle = "navy";
@@ -340,7 +348,7 @@ function placepengesa() {
     
      if (e.code == "Space") {
         x = 1;
-        console.log(x);
+        // console.log(x);
     }
     if (e.code == "ArrowUp" && frame.y == groundY) {
         velocityy = -11;
@@ -349,7 +357,7 @@ function placepengesa() {
     }
     if (e.code == "ArrowDown") {
         x=2;
-        console.log("2");
+        // console.log("2");
     }
  }
 
@@ -362,12 +370,12 @@ function placepengesa() {
 
 function togglePause() {
     isPaused = true;
-    console.log("pause");
+    // console.log("pause");
     pengesaArr.length = 0;
 }
 function togglePlay() {
     isPaused = false;
-     console.log("play");
+    //  console.log("play");
     pengesaArr.length = 0;
 }
 
@@ -383,6 +391,8 @@ function togglePlay() {
     score=0;
     coins=0;
      velocityx = -4;
+    happyCount=0;
+     sadCount=0;
     replayVisible = false;
     hideReplayBtn(replayVisible);
     for(let i=0;i<5;i++){
@@ -394,75 +404,130 @@ function togglePlay() {
    function shpjegime(){
    const info1 = document.getElementById("info1"); 
  document.getElementById("shpjegimBtn").onclick = () => {
-    console.log("x");
+    // console.log("x");
    togglePause(); 
   info1.style.display = "block";
    
-};
+}
    document.getElementById("closeInfo1").onclick = () => {info1.style.display = "none";
     togglePlay();
    }
-}
-    // document.addEventListener("keydown", movesailor); 
-
-    // sailor.onload = function () {
-    //     setInterval(() => {
-    //         // Clear canvas
-    //         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    //         // Draw current frame from sailor sheet
-    //         ctx.drawImage(
-    //             sailor,
-    //             currentFrame * frameWidth, 0,     // source x, y
-    //             frameWidth, frameHeight,          // source width, height
-    //             0, 0,                              // destination x, y
-    //             frameWidth, frameHeight           // destination width, height
-    //         );
-
-    //         // Advance to next frame (loop)
-    //         currentFrame = (currentFrame + 1) % numFrames;
-    //     }, 150);
-    // };
+};
 
 
-// let canvas;
-//     let ctx;
-//     let frameWidth = 100; 
-//     let frameHeight = 100;  
-//     let numFrames = 5;    
+const run = async()=>{
+let happyCount = 0;
+let sadCount = 0;
+let angryCount = 0;
+let neutralCount = 0;
+let fearfulCount = 0;
+let disgustedCount = 0;
+let surprisedCount = 0;
+let allhappyCount = 0;
+let allsadCount = 0;
+let allangryCount = 0;
+let allneutralCount = 0;
+let allfearfulCount = 0;
+let alldisgustedCount = 0;
+let allsurprisedCount = 0;
+    
+    const stream = await navigator.mediaDevices.getUserMedia({
+        video:true,
+        audio: false,
 
-//     let currentFrame = 0;
-//     let x =0;
+    });
+    const videoFeedEl = document.getElementById('video-feed')
+    videoFeedEl.srcObject = stream
+    await Promise.all([
+        faceapi.nets.ssdMobilenetv1.loadFromUri('/face-api-js-starter-main/public/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('/face-api-js-starter-main/public/models'),
+        faceapi.nets.faceRecognitionNet.loadFromUri('/face-api-js-starter-main/public/models'),
+        faceapi.nets.ageGenderNet.loadFromUri('/face-api-js-starter-main/public/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('/face-api-js-starter-main/public/models')
+    ]);
 
+    const canvas = document.getElementById('canvasface');
+    const updateCanvasDimensions = () => {
+        canvas.style.left = `${videoFeedEl.offsetLeft}px`;
+        canvas.style.top = `${videoFeedEl.offsetTop}px`;
+        canvas.height = videoFeedEl.videoHeight;
+        canvas.width = videoFeedEl.videoWidth;
+    };
 
-//     document.addEventListener("keydown", movesailor); 
-//     window.onload = function() {
+    updateCanvasDimensions();
 
-//         canvas = document.getElementById('gameCanvas');
-//          ctx = canvas.getContext('2d');
-//             let sailor = new Image();
-//          if(x==0){
-//          sailor.src = 'Walking_KG_2.png';}
-         
-//         setInterval(() => {
-//             ctx.clearRect(0, 0, canvas.width, canvas.height);
+    window.addEventListener('resize', updateCanvasDimensions);
+    
 
-//             ctx.drawImage(
-//                 sailor,
-//                 currentFrame * frameWidth, 0,    
-//                 frameWidth, frameHeight,  
-//                 0, 0,
-//                 frameWidth, frameHeight 
-//             );
+    setInterval(async()=>{
+        let faceAIData = await faceapi.detectAllFaces(videoFeedEl)
+        .withFaceLandmarks()
+        .withFaceDescriptors()
+        .withAgeAndGender()
+        .withFaceExpressions();
+        console.log(faceAIData)
 
-//             currentFrame = (currentFrame + 1) % numFrames;
-            
-//         }, 150); 
-//     };
+        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
+        faceAIData = faceapi.resizeResults(faceAIData, videoFeedEl);
 
-//     function movesailor(e){
-//     if(e.code == "Space" || e.code == "ArrowUp"){
-//        x=1;
-//        console.log(x);
-//     }
-// }
+    let emotionText = "";
+
+         faceAIData.forEach(face => {
+             const{age, gender, genderProbability} = face
+             const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
+         const ageText =`${Math.round(age)} vjec`
+        const textField = new faceapi.draw.DrawTextField(
+            [genderText, ageText],  // Text to display
+             face.detection.box.topRight // Position
+         )
+        const expressions = face.expressions;
+        const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
+        const topEmotion = sorted[0][0];
+
+        switch (topEmotion) {
+            case 'happy':
+                happyCount++;
+                break;
+            case 'sad':
+                sadCount++;
+                break;
+            case 'angry':
+                angryCount++;
+                break;
+            case 'neutral':
+                neutralCount++;
+                break;
+            case 'fearful':
+                fearfulCount++;
+                break;
+            case 'disgusted':
+                disgustedCount++;
+                break;
+            case 'surprised':
+                surprisedCount++;
+                break;
+        } 
+
+        if(happyCount==10){
+           velocityx = -5; 
+           console.log("ke be 10 happy");
+        }
+        else if(happyCount==30){
+           velocityx = -6; 
+           console.log("ke be 30 happy");
+            happyCount=0;
+        }
+        else if(sadCount==5 && velocityx!=-4){
+           velocityx = -4; 
+           console.log("ke be 5 sad");
+            sadCount=0;
+            happyCount=0;
+        }
+        // else if(fearfulCount==10){
+        //     window.alert("10 fearefull");
+        // }
+        emotionText += `Emocion: ${topEmotion}<br>`;
+     })
+    },1000)
+} 
+ 
