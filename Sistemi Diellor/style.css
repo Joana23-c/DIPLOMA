@@ -17,17 +17,17 @@ body {
   position: relative;
 }
 
+/* Qendra e orbitave: qendra e container-it (40em/2 = 20em) */
 .sun {
   position: absolute;
-  top: 14em;
-  left: 14.5em;
+  top: 18em;   
+  left: 18em;  
   width: 12em;
   height: 13em;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 .sun img {
@@ -35,46 +35,33 @@ body {
   width: 145%;
 }
 
-/* Orbit containers */
-.mercury, 
-.venus, 
-.earth, 
+.mercury,
+.venus,
+.earth,
 .mars,
 .jupiter,
- .saturn, 
- .uranus,
+.saturn,
+.uranus,
 .neptune,
- .pluto {
+.pluto {
   position: absolute;
   border-radius: 50%;
-  pointer-events: none; /* Disable clicks on orbit paths */
+  pointer-events: none; 
 }
 
-/* Planet links */
-.planet-link {
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(50%, 0);
-  pointer-events: auto; /* Enable clicks on planets */
-  display: block;
-}
-
-/* Orbit animations and sizes */
 .mercury {
-  top: 10.5em;
-  left: 11em;
+  top: 15em;
+  left: 15em;
   width: 19em;
   height: 19em;
   animation: orbit 68.7s linear infinite;
 }
-
 .venus {
-  top: 8em;
-  left: 8.5em;
+  top: 12em;
+  left: 10em;
   width: 24em;
   height: 24em;
-  animation: orbit 48.7s linear infinite;
+  animation: orbit 48s linear infinite;
 }
 
 .earth {
@@ -142,26 +129,24 @@ body {
   animation: orbit 18s linear infinite;
 }
 
-/* Planet images */
 .mercury img, .venus img, .earth img,
 .moon img, .mars img, .jupiter img,
 .saturn img, .uranus img, .neptune img,
 .pluto img {
   border-radius: 50%;
   object-fit: cover;
-  pointer-events: auto; /* Ensure images are clickable */
+  pointer-events: auto; 
 }
 
-/* Individual planet sizes */
+.mercury img { width: 3em; height: 3em; }
+.venus img { width: 4em; height: 4em; }
+.earth img { width: 5em; height: 5em; }
+.mars img { width: 3em; height: 3em; }
 .jupiter img { width: 9em; height: 9em; }
 .saturn img { width: 8em; height: 8em; }
 .uranus img { width: 6em; height: 6em; }
 .neptune img { width: 6em; height: 6em; }
 .pluto img { width: 4em; height: 4em; }
-.earth img { width: 5em; height: 5em; }
-.venus img { width: 4em; height: 4em; }
-.mercury img { width: 3em; height: 3em; }
-.mars img { width: 3em; height: 3em; }
 .moon img { width: 1.2em; height: 1.2em; }
 
 .stars {
