@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupiter</title>
+      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+          <link rel="icon" type="image/x-icon" href="./images/jupiter.png">
+
+     <style>
+       body{
+       width: 100vw; 
+       height: 100vh;
+        background-image: url("./images/Green_Nebula_05-1024x1024.png");
+        font-family:'press Start 2P', Courier, monospace;
+        color: #32CD32;
+    }
+    a{
+        text-decoration: none;
+        color:  #32CD32;
+    }
+
+    h1{ 
+        text-align:center;
+        font-size:30px;
+        text-shadow:5px 5px 10px rgba(44, 162, 33, 0.975);
+        margin-top: 40px;
+    }
+      /*Paketat*/
+        .infoboxs{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3%;
+            justify-content: center;
+            margin-left: 15px;
+            margin-right: 15px;
+            
+
+        }
+        .box {
+            background: #ffffff;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgb(0, 0, 0);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.2s ease;
+            background-color: transparent;
+            backdrop-filter: blur(2px);
+            margin-top: 15px;
+            float: left;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+        }
+
+        .box-image {
+            height: 170px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f9f9f9;
+        }
+
+        .box-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .box-content {
+            padding: 16px;
+            text-align: center;
+        }
+
+
+        h3 {
+            margin: 0 0 10px 0;
+            color: #32CD32;
+            font-size: 12px;
+        }
+
+
+        .infoBtn {
+            display: inline-block;
+            background: none;
+            color: white;
+            border: 1px solid  #32CD32;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            
+        }
+
+        /* stilizimi  i shopping cart */
+        .infoBtn:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+    .info {
+           font-family: Arial, sans-serif;
+      padding: 40px;
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.718);
+    }
+    
+ .info-content {
+  background-image: url("./images/Green_Nebula_05-1024x1024.png");
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+    .close-btn {
+      background-color: transparent;
+      color: white;
+      border: none;
+     margin-bottom: -10%;
+      margin-left:270px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+      </style>
+</head>
+<body>
+      <a href="../jupiter/jupiterHyrje.html"><h1>Planeti Jupiter</h1></a>
+    <section id="infoboxs" class="infoboxs">
+        
+    <div class="box" id="infobox1">
+        <div class="box-image" >
+            <img src="./images/jupiter-marble-pia22946-16x9-1.webp" >
+        </div>
+        <div class="box-content">
+            <h3>Një njohje kalimtare</h3>
+            <a  class="infoBtn" id="infoBtn1">Mëso →</a>
+        </div>
+    </div>
+      <div id="info1" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo1"><img src="./images/crossred.png"></button> 
+         
+         <p>Jupiteri është planeti i pestë nga Dielli dhe më i madhi në Sistemin Diellor. Ai është një gjigand gazor dhe ka një pamje shumë karakteristike për shkak të stuhive dhe shiritave ngjyrë kafe e portokalli në atmosferën e tij. Është emëruar sipas perëndisë romake të qiellit,Jupiterit, ekuivalent i Zeusit në mitologjinë greke.
+
+</p>
+         </div>
+  </div>
+
+
+    <div class="box" id="infobox2">
+        <div class="box-image" >
+            <img src="./images/futuristic-planet-orbits-galaxy-animals-thrive-space-generated-by-ai.jpg" >
+        </div>
+        <div class="box-content">
+            <h3>I njohur për :</h3>
+            <a  class="infoBtn" id="infoBtn2">Mëso →</a>
+        </div>
+    </div>
+      <div id="info2" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo2"><img src="./images/crossred.png"></button> 
+         
+         <p>Jupiteri njihet më shumë për:
+
+Madhësinë e tij – është planeti më i madh në Sistemin Diellor.<br>
+
+Stuhitë e fuqishme, sidomos Lecka e Kuqe e Madhe.<br>
+
+Gravitetin e tij të fortë, që ndihmon në mbrojtjen e Tokës nga kometat dhe asteroidet, duke i tërhequr ose devijuar ato.<br>
+
+Hënat e shumta, disa prej të cilave janë kandidatë për jetë jashtëtokësore.<br>
+
+</p>
+         </div>
+  </div>
+
+    <div class="box" id="infobox3">
+        <div class="box-image" >
+            <img src="./images/Screenshot 2025-07-02 222816.png" >
+        </div>
+        <div class="box-content">
+            <h3>A ka jetë?</h3>
+            <a  class="infoBtn" id="infoBtn3">Mëso →</a>
+        </div>
+    </div>
+      <div id="info3" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo3"><img src="./images/crossred.png"></button> 
+         
+         <p>Deri tani nuk ka prova që Jupiteri mbështet jetë. Atmosfera e tij është shumë toksike dhe ka temperatura ekstreme. Megjithatë, disa nga henat e tij si Europa, mund të kenë oqeane nën sipërfaqe, ku ndoshta mund të ekzistojë jeta mikroskopike.</p>
+         </div>
+  </div>
+
+    <div class="box" id="infobox4">
+        <div class="box-image" >
+            <img src="./images/Screenshot 2025-07-02 231522.png" >
+        </div>
+        <div class="box-content">
+            <h3>Madhësia dhe Distanca</h3>
+            <a  class="infoBtn" id="infoBtn4">Mëso →</a>
+        </div>
+    </div>
+      <div id="info4" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo4"><img src="./images/crossred.png"></button> 
+         
+         <p>Jupiteri ka një diametër rreth 143,000 km, duke qenë më shumë se 11 herë më i madh se Toka. Ndodhet mesatarisht 778 milionë km larg nga Dielli dhe rreth 588 milionë km nga Toka kur është më afër saj.</p>
+         </div>
+  </div>
+
+
+    <div class="box" id="infobox5">
+        <div class="box-image" >
+            <img src="./images/image-1920-9afe7b24195b22bcf5640439b4f919bd.jpeg" >
+        </div>
+        <div class="box-content">
+            <h3>Hënat</h3>
+            <a  class="infoBtn" id="infoBtn5">Mëso →</a>
+        </div>
+    </div>
+      <div id="info5" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo5"><img src="./images/crossred.png"></button> 
+         
+         <p>Jupiteri ka për më shumë se 90 hëna, dhe numri vazhdon të rritet me zbulime të reja. Katër hënat më të njohura janë Io, Europa, Ganimedi dhe Kalisto, të quajtura edhe henat Galileane, pasi u zbuluan nga Galileo Galilei në vitin 1610. Ganimedi është hëna më e madhe në Sistemin Diellor.</p>
+         </div>
+  </div>
+
+    <div class="box" id="infobox6">
+        <div class="box-image" >
+            <img src="./images/jupiter_rings_bright.avif" >
+        </div>
+        <div class="box-content">
+            <h3>Unazat</h3>
+            <a  class="infoBtn" id="infoBtn6">Mëso →</a>
+        </div>
+    </div>
+      <div id="info6" class="info">
+        <div class="info-content">
+         <button class="close-btn" id="closeInfo6"><img src="./images/crossred.png"></button> 
+         
+         <p>Edhe pse janë shumë më pak të dukshme se ato të Saturnit, Jupiteri ka një sistem të hollë unazash, të përbërë kryesisht nga pluhur. Këto unaza janë zbuluar nga sonda Voyager 1 në vitin 1979.</p>
+         </div>
+  </div>
+  
+  
+      <div class="box" id="infobox7">
+          <div class="box-image" >
+              <img src="./images/Diagram-cloud-structure-Jupiter-core.webp" >
+          </div>
+          <div class="box-content">
+              <h3>Struktura</h3>
+              <a  class="infoBtn" id="infoBtn7">Mëso →</a>
+          </div>
+      </div>
+        <div id="info7" class="info">
+          <div class="info-content">
+           <button class="close-btn" id="closeInfo7"><img src="./images/crossred.png"></button> 
+           
+           <p>Jupiteri nuk ka një sipërfaqe të fortë. Ai përbëhet kryesisht nga hidrogjen dhe helium. Në thellësi, ka një shtresë të trashë të lëngshme dhe ndoshta një bërthamë të vogël shkëmbore. Atmosfera e tij është shumë dinamike, me stuhinë gjigante të njohur si “Lecka e Kuqe e Madhe”, që ekziston prej qindra vitesh.</p>
+           </div>
+    </div>
+  
+
+
+</section>
+
+    <script src="../urani/uraniScript.js"></script>
+</body>
+</html>

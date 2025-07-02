@@ -1,0 +1,56 @@
+body{
+    background-image: url("./images/Green_Nebula_05-1024x1024.png");
+    font-family:'press Start 2P', Courier, monospace;
+    color: #32CD32;
+}
+h1{
+    text-align:center;
+    font-size:30px;
+    text-shadow:5px 5px 10px rgba(44, 162, 33, 0.975);
+     margin-top: 40px;
+}
+
+#sailor {
+    margin-top:20px;
+    margin-left:3%;
+    height: 400px;
+    width :400px;
+    float:left;
+}
+#mission p{
+    display: flex;
+     margin-top:80px;
+     margin-left:6%;
+     margin-right:3%;
+     background-color: rgba(19, 18, 18, 0.622);
+     font-size:13px;
+      line-height: 1.7;
+      /* letter-spacing: 2px; */
+     padding: 15px;
+}
+#mission button{
+     display: block;
+     margin: 20px auto 0 auto;
+      text-align: center;
+      color: #32CD32;
+      background-color: rgb(19, 18, 18);
+      font-family: "press Start 2P";
+      font-style: normal;
+      border:none;
+      box-shadow: 5px 5px 15px #32CD32; 
+       cursor: pointer;
+        overflow: hidden;
+        transform: scale(1.2);
+        animation: pulse 2s infinite;
+}
+ @keyframes pulse {
+  0% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+   transform: scale(1.2);
+  }
+ }
