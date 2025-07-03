@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,9 +112,9 @@ h1{
     </div>
     <div id="mission">
         <p>Misioni i planetit të akullt !<br><br> Misioni i Sailor Girl  për të shpëtuar Sistemin Diellor nga alienet e galaktikës  M33  që duan të shkatërrojnë njerëzimin vazhdon.<br><br> Tashmë ajo gjendet në planetin Uran me synimin për te eliminuar alienët që kanë zbarkuar këtu, dhe me qëllimin për të mbledhur thesarin  300 coins për të pasur mundësi të plotësojë misionin e saj heroik.<br><br>Këshillohet që para se të niset në mision Silor Girl duhet të ketë të gjitha njohuritë e nevojshme për terrenin dhe mjedisin që do të përballet.</p>
-        <button onclick="location.href='uranusSailor.html'">Luaj</button>
+        <button onclick="location.href='uranusSailor.php'">Luaj</button>
         <button onclick="location.href='uranusInfo1.html'">Zbulo terrenin</button>
-        <button onclick="location.href='../SISTEMI DIELLOR/INDEX.html'">Kthehu</button>
+        <button onclick="location.href='../SISTEMI DIELLOR/INDEX.php'">Kthehu</button>
     </div>
 </body>
 <script>

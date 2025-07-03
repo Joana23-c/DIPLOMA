@@ -1,4 +1,6 @@
+
    console.log(faceapi);
+   
    let canvas;
     let canvasWidth=750;
     let canvasHeight=250;
@@ -266,13 +268,34 @@ y = 20: the vertical position (20 pixels from the top). */
 //    velocityx = -6;
 //  }
 
- if(coins == 300){
+ if(coins == 30){//300
     ctx.fillStyle = "navy";
     ctx.font = "25px courier";
     ctx.fillText("Ti fitove !", 300, 125); 
     win.currentTime = 0; 
     win.play();
     gameover=true;
+    console.log({
+    coins,
+    score,
+    happy: allhappyCount,
+    sad: allsadCount,
+    disgusted: alldisgustedCount,
+    angry: allangryCount,
+    neutral: allneutralCount,
+    surprised: allsurprisedCount
+});
+     saveGame();
+
+     happyCount = 0;
+     sadCount = 0;
+     allhappyCount = 0;
+     allsadCount = 0;
+     allangryCount = 0;
+     allneutralCount = 0;
+     alldisgustedCount = 0;
+     allsurprisedCount = 0;
+    
  }
       
 }
@@ -415,21 +438,19 @@ function togglePlay() {
 };
 
 
-const run = async()=>{
 let happyCount = 0;
 let sadCount = 0;
-let angryCount = 0;
-let neutralCount = 0;
-let fearfulCount = 0;
-let disgustedCount = 0;
-let surprisedCount = 0;
 let allhappyCount = 0;
 let allsadCount = 0;
 let allangryCount = 0;
 let allneutralCount = 0;
-let allfearfulCount = 0;
 let alldisgustedCount = 0;
 let allsurprisedCount = 0;
+
+
+const run = async()=>{
+
+
     
     const stream = await navigator.mediaDevices.getUserMedia({
         video:true,
@@ -438,13 +459,14 @@ let allsurprisedCount = 0;
     });
     const videoFeedEl = document.getElementById('video-feed')
     videoFeedEl.srcObject = stream
-    await Promise.all([
-        faceapi.nets.ssdMobilenetv1.loadFromUri('/face-api-js-starter-main/public/models'),
-        faceapi.nets.faceLandmark68Net.loadFromUri('/face-api-js-starter-main/public/models'),
-        faceapi.nets.faceRecognitionNet.loadFromUri('/face-api-js-starter-main/public/models'),
-        faceapi.nets.ageGenderNet.loadFromUri('/face-api-js-starter-main/public/models'),
-        faceapi.nets.faceExpressionNet.loadFromUri('/face-api-js-starter-main/public/models')
-    ]);
+await Promise.all([
+    faceapi.nets.ssdMobilenetv1.loadFromUri('../face-api-js-starter-main/public/models'),
+    faceapi.nets.faceLandmark68Net.loadFromUri('/new%20folder/face-api-js-starter-main/public/models'),
+    faceapi.nets.faceRecognitionNet.loadFromUri('/new%20folder/face-api-js-starter-main/public/models'),
+    faceapi.nets.ageGenderNet.loadFromUri('/new%20folder/face-api-js-starter-main/public/models'),
+    faceapi.nets.faceExpressionNet.loadFromUri('/new%20folder/face-api-js-starter-main/public/models')
+]);
+
 
     const canvas = document.getElementById('canvasface');
     const updateCanvasDimensions = () => {
@@ -486,25 +508,24 @@ let allsurprisedCount = 0;
 
         switch (topEmotion) {
             case 'happy':
+                allhappyCount++
                 happyCount++;
                 break;
             case 'sad':
+                allsadCount++;
                 sadCount++;
                 break;
-            case 'angry':
-                angryCount++;
+            case 'disgusted':
+                alldisgustedCount++;
+                break;
+                case 'angry':
+                allangryCount++;
                 break;
             case 'neutral':
-                neutralCount++;
-                break;
-            case 'fearful':
-                fearfulCount++;
-                break;
-            case 'disgusted':
-                disgustedCount++;
+                allneutralCount++;
                 break;
             case 'surprised':
-                surprisedCount++;
+                allsurprisedCount++;
                 break;
         } 
 
@@ -531,3 +552,24 @@ let allsurprisedCount = 0;
     },1000)
 } 
  
+function saveGame() {
+    fetch('save_game_uran.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            coins: coins,
+            score: score,
+            happy: allhappyCount,
+            sad: allsadCount,
+            disgusted: alldisgustedCount,
+            angry: allangryCount,
+            neutral: allneutralCount,
+            surprised: allsurprisedCount
+        })
+    })
+    .then(response => response.text())
+    .then(data => console.log("Save status:", data))
+    .catch(error => console.error("Error saving game:", error));
+}
