@@ -282,26 +282,24 @@ function placepengesa() {
 }
 //funksioni per jump
 function movesailor(e){
-    //nese eshte gameover true dmth ti ke humb nuk mund te hidhesh me 
     if(gameover){
         return;
     }
-    //nese eshte klipuar space ose arrowup dhe pozicioni vertikal i dino eshte ne pozicionin default (pra toke) mund te bej jump
+
     if((e.code == "Space" || e.code == "ArrowUp") && frame.y==groundY ){
         //jump
-        velocityy = -11; //dmth e bej te ngjitet 10 njesi lart dhe vizatoj dizaurin 
-        jumpSound.currentTime = 0; // rewind if still playing
+        velocityy = -11; 
+        jumpSound.currentTime = 0; 
         jumpSound.play();
     }
 }
 
-//perplasje, mbivendosje
+
 function detectCollision(a, b) {
-    return a.x+40 < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner This creates a tolerance or buffer zone of 40 pixels. a can be up to 40 pixels into b (from the right side) and still not be considered a collision.
-           a.x + a.width > b.x+30 &&   //a's top right corner passes b's top left corner
-           a.y< b.y + b.height  &&  //a's top left corner doesn't reach b's bottom left corner
-           a.y + a.height > b.y+30 ;    //a's bottom left corner passes b's top left corner
-           //Nëse të gjitha janë true, ka përplasje!
+    return a.x+40 < b.x + b.width &&  
+           a.x + a.width > b.x+30 &&   
+           a.y< b.y + b.height  &&  
+           a.y + a.height > b.y+30 ;
 }
 
 function togglePause() {
