@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    // Nuk lejohet hyrja pa login
+    header("Location: ../login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +35,7 @@
       </div>
     </div>
     <div class="mars" >
-      <a href="../mars/MarsSailorGirl.html"><img src="./images/marsx.png" alt="Mars"></a>
+      <a href="../mars/MarsSailorGirl.php"><img src="./images/marsx.png" alt="Mars"></a>
     </div>
     <div class="jupiter">
       <a href="../jupiter/jupiterHyrje.html"><img src="./images/jupiter.png" alt="Jupiter"></a>

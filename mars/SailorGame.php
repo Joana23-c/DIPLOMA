@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +21,7 @@
   <div id="control">
     <img src="./images/pause-button.png" id="pauseBtn">
     <img src="./images/play.png" id="playBtn">
-    <a href="MarsSailorGirl.html" id="quitBtn"><img src="./images/cross.png" ></a>
+    <a href="MarsSailorGirl.php" id="quitBtn"><img src="./images/cross.png" ></a>
     <img src="./images/setting.png" id="shpjegimBtn" >
   </div>
 
@@ -39,7 +47,7 @@
         <video id ="video-feed" height="560" width="720" autoplay></video>
     </div>
     <!-- <p id="printime"></p> -->
-     <script src="/face-api-js-starter-main/public/face-api.min.js"></script>
+     <script src="../face-api-js-starter-main/public/face-api.min.js"></script>
   <script src="./sailor.js"></script>
 </body>
 </html>
