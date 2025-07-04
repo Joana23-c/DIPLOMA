@@ -38,13 +38,13 @@ if (!isset($_SESSION['user_id'])) {
       <a href="../mars/MarsSailorGirl.php"><img src="./images/marsx.png" alt="Mars"></a>
     </div>
     <div class="jupiter">
-      <a href="../jupiter/jupiterHyrje.html"><img src="./images/jupiter.png" alt="Jupiter"></a>
+      <a href="../jupiter/jupiterHyrje.php"><img src="./images/jupiter.png" alt="Jupiter"></a>
     </div>
     <div class="saturn">
       <a href="#"><img src="./images/saturn.png" alt="Saturn"></a>
     </div>
     <div class="uranus">
-      <a href="../urani/uranusHyrje.html"><img src="./images/uranus.png" alt="Uranus"></a>
+      <a href="../urani/uranusHyrje.php"><img src="./images/uranus.png" alt="Uranus"></a>
     </div>
     <div class="neptune">
       <a href="#"><img src="./images/neptune.png" alt="Neptune"></a>

@@ -2,19 +2,101 @@
 <html>
 <head>
     <title>Register</title>
+         <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url("Purple_Nebula_08-1024x1024.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center center;
+        }
+
+        .container {
+            width: 30vw;
+           
+            margin-left: 35vw;
+            margin-top: 14vh;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgb(183, 117, 238);
+            background-color: transparent;
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
+        input, textarea {
+            width: 80%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            background-color: transparent;
+            backdrop-filter: blur(10px);
+            color: #f4f4f4;
+            border: 3px solid #48069e;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #3d0783;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        p {
+            color: #f4f4f4;
+            text-align: center;
+        }
+
+        a {
+            color: #310251;
+            text-decoration: none;
+        }
+
+        label {
+            color: #ffffff;
+        }
+
+        input::placeholder {
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
     <h2>Register</h2>
     <form action="register.php" method="POST">
-        <input type="text" name="username" placeholder="Username" required><br><br>
-
-        <label>Gender:</label><br>
-        <input type="radio" name="gender" value="F" checked> Female<br>
-        <input type="radio" name="gender" value="M"> Male<br><br>
-        <input type="number" name="age" placeholder="Age" required><br><br>
+        <input type="text" name="username" placeholder="Username" required>
+        <p>Gender:</p>
+        <label >Female</label>
+        <input type="radio" name="gender" value="F" checked> <br>
+        <label>Male</label>
+        <input type="radio" name="gender" value="M">
+        <input type="number" name="age" placeholder="Mosha" required><br>
 
         <button type="submit">Register</button>
     </form>
     <p>Already have an account? <a href="login.html">Login</a></p>
+ </div>
 </body>
 </html>

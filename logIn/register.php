@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db = 'diploma_prove';
+$db = 'database';
 $user = 'root';
 $pass = '';
 

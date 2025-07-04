@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +21,14 @@
                 <h1>Ti fitove!</h1>
                 <p id="moves"></p>
                 <input id="okBtn" type="button" onclick="replay()" value="Luaj Përsëri!" />
-                <a href="./jupiterHyrje.html">
+                <a href="./jupiterHyrje.php">
                     <input id="quitBtn" type="button"  value="Ktheu!" />
                 </a>
          </div>
         </div>
 
          <br>
-            <a href="./jupiterHyrje.html">
+            <a href="jupiterHyrje.php">
                     <input id="quitBtn" type="button"  value="Ktheu!" />
             </a>
 

@@ -2,14 +2,76 @@
 <html>
 <head>
     <title>Login</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url("Purple_Nebula_07-1024x1024.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center center;
+
+        }
+        .container {
+            width: 25%;
+            margin-left: 35vw;
+            margin-top : 25vh;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgb(183, 117, 238);
+
+            background-color: transparent;
+            backdrop-filter: blur(10px);
+        }
+         h2 {
+            text-align: center;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            background-color: transparent;
+            backdrop-filter: blur(10px);
+            color: #f4f4f4;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #3d0783;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        p{
+            color: #f4f4f4;
+        }
+        a{
+            color: #d600fc;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 <body>
-    <h2>Login</h2>
+    <div class="container">
+    <h2>LogIn</h2>
     <form action="login.php" method="POST">
-        <input type="text" name="username" placeholder="Username" required><br><br>
+        <input type="text" name="username" placeholder="Username" required><br>
         <!-- <input type="password" name="password" placeholder="Password" required><br><br> -->
         <button type="submit">Login</button>
     </form>
     <p>New user? <a href="register.html">Register here</a></p>
+</div>
 </body>
 </html>

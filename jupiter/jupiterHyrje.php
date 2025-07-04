@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html >
 <head>
@@ -18,9 +25,9 @@
         <br>Vetëm pasi Sailor Girl të ketë arritur të marrë kristalet do të zotërojë fuqinë e duhur për të mposhtur alienët.
 
 </p>
-        <button onclick="location.href='labirint.html'">Luaj</button>
+        <button onclick="location.href='labirint.php'">Luaj</button>
                 <button onclick="location.href='jupiterInfo.html'">Zbulo terrenin</button>
-        <button onclick="location.href='../SISTEMI DIELLOR/INDEX.html'">Kthehu</button>
+        <button onclick="location.href='../SISTEMI DIELLOR/INDEX.php'">Kthehu</button>
     </div>
 </body>
 </html>
