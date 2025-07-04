@@ -1,3 +1,4 @@
+let moves = 0;
 console.log(faceapi);
 function rand(max) {
     return Math.floor(Math.random() * max);
@@ -12,6 +13,8 @@ function shuffle(a) {
   }
  
   function winMsg(moves) {
+    moves=moves+1;
+    console.log(moves);
     document.getElementById("moves").innerHTML = "Ti ke bërë " + moves + " lëvizje.";
     // toggleVisablity("Message-Container");  
     document.getElementById("Message-Container").style.visibility = "visible";
@@ -265,7 +268,7 @@ function shuffle(a) {
   function Player(maze, c, _cellsize, onComplete, sprite = null) {
     var ctx = c.getContext("2d");
     var drawSprite;
-    var moves = 0;
+    // var moves = 0;
 
     if (sprite != null) {
       drawSprite = drawSpriteImg;
@@ -315,54 +318,44 @@ function shuffle(a) {
       );
     }
   
-    function check(e) {
-      var cell = map[cellCoords.x][cellCoords.y];
-      moves++;
-      switch (e.keyCode) {
-        case 37: // west
-          if (cell.w == true) {
-            removeSprite(cellCoords);
-            cellCoords = {
-              x: cellCoords.x - 1,
-              y: cellCoords.y
-            };
-            drawSprite(cellCoords);
-          }
-          break;
-        case 38: // north
-          if (cell.n == true) {
-            removeSprite(cellCoords);
-            cellCoords = {
-              x: cellCoords.x,
-              y: cellCoords.y - 1
-            };
-            drawSprite(cellCoords);
-          }
-          break;
-       
-        case 39: // east
-          if (cell.e == true) {
-            removeSprite(cellCoords);
-            cellCoords = {
-              x: cellCoords.x + 1,
-              y: cellCoords.y
-            };
-            drawSprite(cellCoords);
-          }
-          break;
-       
-        case 40: // south
-          if (cell.s == true) {
-            removeSprite(cellCoords);
-            cellCoords = {
-              x: cellCoords.x,
-              y: cellCoords.y + 1
-            };
-            drawSprite(cellCoords);
-          }
-          break;
+function check(e) {
+  var cell = map[cellCoords.x][cellCoords.y];
+  let canMove = false;
+  let newCoords = { x: cellCoords.x, y: cellCoords.y };
+  switch (e.keyCode) {
+    case 37: // west
+      if (cell.w == true) {
+        canMove = true;
+        newCoords = { x: cellCoords.x - 1, y: cellCoords.y };
       }
-    }
+      break;
+    case 38: // north
+      if (cell.n == true) {
+        canMove = true;
+        newCoords = { x: cellCoords.x, y: cellCoords.y - 1 };
+      }
+      break;
+    case 39: // east
+      if (cell.e == true) {
+        canMove = true;
+        newCoords = { x: cellCoords.x + 1, y: cellCoords.y };
+      }
+      break;
+    case 40: // south
+      if (cell.s == true) {
+        canMove = true;
+        newCoords = { x: cellCoords.x, y: cellCoords.y + 1 };
+      }
+      break;
+  }
+  if (canMove) {
+    removeSprite(cellCoords);
+    cellCoords = newCoords;
+    drawSprite(cellCoords);
+    moves++;  // Rrit moves vetëm kur lëvizja bëhet
+  }
+}
+
   
     this.bindKeyDown = function() {
       window.addEventListener("keydown", check, false);
@@ -479,51 +472,65 @@ let viewHeight = view.offsetHeight;
       document.getElementById("mazeContainer").style.opacity = "100";
     }
   }
-  function replay() {
-  document.getElementById("Message-Container").style.visibility = "hidden";
-  makeMaze();
-}
-function replay() {
+//    function replay() {
+//   document.getElementById("Message-Container").style.visibility = "hidden";
+//   makeMaze();
+// }
+async function replay() {
   document.getElementById("Message-Container").style.visibility = "hidden";
   if(happyCount>sadCount){
     console.log(happyCount);
     console.log(sadCount);
-    difficulty=15
+        console.log({
+    happy: allhappyCount,
+    sad: allsadCount,
+    disgusted: alldisgustedCount,
+    angry: allangryCount,
+    neutral: allneutralCount,
+    surprised: allsurprisedCount
+});
+     saveGame();
+      moves=0;
+      difficulty=15
+      
+     happyCount = 0;
+     sadCount = 0;
+     allhappyCount = 0;
+     allsadCount = 0;
+     allangryCount = 0;
+     allneutralCount = 0;
+     alldisgustedCount = 0;
+     allsurprisedCount = 0;
+   
   }else{
      console.log(happyCount);
     console.log(sadCount);
-    difficulty=10;
+     saveGame();
+     moves=0;
+     difficulty=10;
+
+     happyCount = 0;
+     sadCount = 0;
+     allhappyCount = 0;
+     allsadCount = 0;
+     allangryCount = 0;
+     allneutralCount = 0;
+     alldisgustedCount = 0;
+     allsurprisedCount = 0;
+    
 
   }
-happyCount = 0;
-sadCount = 0;
-angryCount = 0;
-neutralCount = 0;
-fearfulCount = 0;
-disgustedCount = 0;
-surprisedCount = 0;
-allhappyCount = 0;
-allsadCount = 0;
-allangryCount = 0;
-allneutralCount = 0;
-allfearfulCount = 0;
-alldisgustedCount = 0;
-allsurprisedCount = 0;
 
   makeMaze();
 }
 let happyCount = 0;
 let sadCount = 0;
-let angryCount = 0;
-let neutralCount = 0;
-let fearfulCount = 0;
-let disgustedCount = 0;
-let surprisedCount = 0;
+
 let allhappyCount = 0;
 let allsadCount = 0;
 let allangryCount = 0;
 let allneutralCount = 0;
-let allfearfulCount = 0;
+
 let alldisgustedCount = 0;
 let allsurprisedCount = 0;
     
@@ -538,11 +545,11 @@ const run = async()=>{
     const videoFeedEl = document.getElementById('video-feed')
     videoFeedEl.srcObject = stream
     await Promise.all([
-        faceapi.nets.ssdMobilenetv1.loadFromUri('/face-api-js-starter-main/public/models'),
-        faceapi.nets.faceLandmark68Net.loadFromUri('/face-api-js-starter-main/public/models'),
-        faceapi.nets.faceRecognitionNet.loadFromUri('/face-api-js-starter-main/public/models'),
-        faceapi.nets.ageGenderNet.loadFromUri('/face-api-js-starter-main/public/models'),
-        faceapi.nets.faceExpressionNet.loadFromUri('/face-api-js-starter-main/public/models')
+        faceapi.nets.ssdMobilenetv1.loadFromUri('../face-api-js-starter-main/public/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('../face-api-js-starter-main/public/models'),
+        faceapi.nets.faceRecognitionNet.loadFromUri('../face-api-js-starter-main/public/models'),
+        faceapi.nets.ageGenderNet.loadFromUri('../face-api-js-starter-main/public/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('../face-api-js-starter-main/public/models')
     ]);
 
     const canvas = document.getElementById('canvasface');
@@ -583,27 +590,26 @@ const run = async()=>{
         const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
         const topEmotion = sorted[0][0];
 
-        switch (topEmotion) {
+                switch (topEmotion) {
             case 'happy':
+                allhappyCount++
                 happyCount++;
                 break;
             case 'sad':
+                allsadCount++;
                 sadCount++;
                 break;
-            case 'angry':
-                angryCount++;
+            case 'disgusted':
+                alldisgustedCount++;
+                break;
+                case 'angry':
+                allangryCount++;
                 break;
             case 'neutral':
-                neutralCount++;
-                break;
-            case 'fearful':
-                fearfulCount++;
-                break;
-            case 'disgusted':
-                disgustedCount++;
+                allneutralCount++;
                 break;
             case 'surprised':
-                surprisedCount++;
+                allsurprisedCount++;
                 break;
         } 
 
@@ -614,3 +620,28 @@ const run = async()=>{
      })
     },1000)
 } 
+function saveGame() {
+  return fetch('save_game_jupiter.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      levizje: moves,
+      difficulty: difficulty,
+      happy: allhappyCount,
+      sad: allsadCount,
+      disgusted: alldisgustedCount,
+      angry: allangryCount,
+      neutral: allneutralCount,
+      surprised: allsurprisedCount
+    })
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log("Save status:", data);
+    return data;
+  })
+  .catch(error => console.error("Error saving game:", error));
+}
+
