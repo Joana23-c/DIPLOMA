@@ -459,13 +459,13 @@ const run = async()=>{
     });
     const videoFeedEl = document.getElementById('video-feed')
     videoFeedEl.srcObject = stream
-await Promise.all([
-    faceapi.nets.ssdMobilenetv1.loadFromUri('../face-api-js-starter-main/public/models'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('/new%20folder/face-api-js-starter-main/public/models'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('/new%20folder/face-api-js-starter-main/public/models'),
-    faceapi.nets.ageGenderNet.loadFromUri('/new%20folder/face-api-js-starter-main/public/models'),
-    faceapi.nets.faceExpressionNet.loadFromUri('/new%20folder/face-api-js-starter-main/public/models')
-]);
+    await Promise.all([
+        faceapi.nets.ssdMobilenetv1.loadFromUri('../face-api-js-starter-main/public/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('../face-api-js-starter-main/public/models'),
+        faceapi.nets.faceRecognitionNet.loadFromUri('../face-api-js-starter-main/public/models'),
+        faceapi.nets.ageGenderNet.loadFromUri('../face-api-js-starter-main/public/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('../face-api-js-starter-main/public/models')
+    ]);
 
 
     const canvas = document.getElementById('canvasface');
