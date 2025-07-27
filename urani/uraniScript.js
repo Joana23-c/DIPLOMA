@@ -22,13 +22,3 @@
     document.getElementById("closeInfo5").onclick = () => info5.style.display = "none";
     document.getElementById("closeInfo6").onclick = () => info6.style.display = "none";
     document.getElementById("closeInfo7").onclick = () => info7.style.display = "none";
-
-    window.onclick = function(event) {
-      if (event.target === info1) info1.style.display = "none";
-      if (event.target === info2) info2.style.display = "none";
-      if (event.target === info3) info2.style.display = "none";
-      if (event.target === info4) info2.style.display = "none";
-      if (event.target === info5) info2.style.display = "none";
-      if (event.target === info6) info2.style.display = "none";
-      if (event.target === info7) info2.style.display = "none";
-    }

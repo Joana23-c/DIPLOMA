@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
+    header("Location: ../logIn/login.html");
     exit();
 }
 ?>
@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mars</title>
       <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-          <link rel="icon" type="image/x-icon" href="./images/marsIcon.png">
+          <link rel="icon"  href="./images/marsIcon.png">
     <link rel="stylesheet" href="MarsSailorGilr.css">
 </head>
 <body>

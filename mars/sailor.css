@@ -1,18 +1,14 @@
-/* body, canvas {
-    cursor: url("cursor-o.png"), auto;
-} */
-
 body{ 
     font-family:'Courier New', Courier, monospace;
    text-align: center;
    background-image: url("./images/Purple_Nebula_01-1024x1024.png");  
 
 }
-#controls {
+#control {
     position: absolute;
     top: 10px;
     left: 10px;
-    z-index: 100; /* Higher than canvas */
+    z-index: 100; 
 }
 
 #info1 {
@@ -21,7 +17,7 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 200;
-    background: white;
+    /* background: white; */
     padding: 20px;
 }
 #pauseBtn{
@@ -57,7 +53,7 @@ body{
 }
     #contanierface{
         display: none;
-        justify-content: center;
+        /* display: block; */
     }
     #canvasface{
         position: absolute;
@@ -82,7 +78,7 @@ body{
 
     .close-btn {
       background-color: transparent;
-      color: white;
+      /* color: white; */
       border: none;
      margin-bottom: -10%;
       margin-left:270px;
@@ -94,8 +90,8 @@ body{
 #canvas{
      background-image : url("./images/image.png");
      background-position: center;
-     background-position: no-repeat;
-       background-size: cover;
+     background-repeat: no-repeat;
+      background-size: cover;
 }
 @media (min-width: 980px) {
   #canvas{

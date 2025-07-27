@@ -1,19 +1,19 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../login.php");
+    header("Location: ../logIn/login.html");
     exit();
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mars</title>
     <link rel="stylesheet" href="sailor.css">  
-    <link rel="icon" type="image/x-icon" href="./images/marsIcon.png">
+    <link rel="icon"  href="./images/marsIcon.png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
  
 </head>
@@ -24,21 +24,21 @@ if (!isset($_SESSION['user_id'])) {
     <a href="MarsSailorGirl.php" id="quitBtn"><img src="./images/cross.png" ></a>
     <img src="./images/setting.png" id="shpjegimBtn" >
   </div>
-
-
-
-<canvas id="canvas" width="750" height="250"></canvas>
-<div id="hidden">
-<button >Luaj perseri!</button>
-</div> 
-   <div id="info1" class="info">
-        <div class="info-content">
-         <button class="close-btn" id="closeInfo1"><img src="./images/crossred.png"></button> 
-         <p> 
-          <img src="./images/space.png"> , <img src="./images/up-arrow.png" id="arrowup">  <img src="./images/equal-mathematical-sign.png" width="24px" height="24px"> <img src="./images/boy.png">
-          <p>
+  
+  <canvas id="canvas" width="750" height="250"></canvas>
+  
+  <div id="hidden">
+    <button >Luaj perseri!</button>
+  </div> 
+  
+  <div id="info1" class="info">
+    <div class="info-content">
+      <button class="close-btn" id="closeInfo1"><img src="./images/crossred.png"></button> 
+      <p> 
+        <img src="./images/space.png"> , <img src="./images/up-arrow.png" id="arrowup">  <img src="./images/equal-mathematical-sign.png" width="24px" height="24px"> <img src="./images/boy.png">
+      </p>
          
-         </div>
+    </div>
   </div> 
   
   <canvas id="canvasface"></canvas>

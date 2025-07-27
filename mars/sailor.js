@@ -345,6 +345,15 @@ function shpjegime(){
         pengesaArray.pop();
     }
     gameover=false;
+     
+    happyCount = 0;
+     sadCount = 0;
+     allhappyCount = 0;
+     allsadCount = 0;
+    allneutralCount = 0;
+    alldisgustedCount = 0;
+     allsurprisedCount = 0;
+
    }
 
 let happyCount = 0;
@@ -400,16 +409,20 @@ const run = async()=>{
         canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
         faceAIData = faceapi.resizeResults(faceAIData, videoFeedEl);
 
+        // faceapi.draw.drawDetections(canvas,faceAIData)
+        //  faceapi.draw.drawFaceLandmarks(canvas,faceAIData);
+        // faceapi.draw.drawFaceExpressions(canvas,faceAIData);
+
     let emotionText = "";
 
          faceAIData.forEach(face => {
-             const{age, gender, genderProbability} = face
-             const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
-         const ageText =`${Math.round(age)} vjec`
-        const textField = new faceapi.draw.DrawTextField(
-            [genderText, ageText],  // Text to display
-             face.detection.box.topRight // Position
-         )
+        //      const{age, gender, genderProbability} = face
+        //      const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
+        //  const ageText =`${Math.round(age)} vjec`
+        // const textField = new faceapi.draw.DrawTextField(
+        //     [genderText, ageText],  // Text to display
+        //      face.detection.box.topRight // Position
+        //  )
         const expressions = face.expressions;
         const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
         const topEmotion = sorted[0][0];
