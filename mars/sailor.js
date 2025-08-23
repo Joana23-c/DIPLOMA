@@ -68,16 +68,19 @@ window.onload = function () {
 
      document.getElementById("pauseBtn").addEventListener("click", togglePause);
     document.getElementById("playBtn").addEventListener("click", togglePlay);
-    document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
+    document.getElementById("shpjegimBtn").addEventListener("click", () => {
+    togglePause();
+    document.getElementById("info1").style.display = "block";
+});
     document.getElementById("closeInfo1").addEventListener("click", () => {
         document.getElementById("info1").style.display = "none";
         togglePlay();
     });
 
-    // Fillo me Face API menjëherë
+    // nis face api fillimisht
     run();
 
-    // Prit 5 sekonda përpara se të nisë loja
+    // Pres 5 sekonda para se te nis lojen per ti dhene kohe face api per tu loduar
     setTimeout(() => {
       
         board = document.getElementById("canvas");
@@ -108,7 +111,7 @@ window.onload = function () {
         setInterval(placepengesa, 1000);
   
 
-    }, 5000); // 3 sekonda pritje per tu bere load face api 
+    }, 5000); // 5 sekonda pritje per tu bere load face api 
    
 
 }
@@ -200,7 +203,7 @@ if (frame.y > framey) {
 //    velocityx = -6;
 //  }
  
- if(coins >= 150){
+ if(coins >= 20){
     context.fillStyle = "red";
     context.font = "25px courier";
     context.fillText("Ti fitove !", 300, 125);
@@ -304,26 +307,26 @@ function detectCollision(a, b) {
 
 function togglePause() {
     isPaused = true;
-     console.log("pause");
+    //  console.log("pause");
     pengesaArray.length = 0;
 }
 function togglePlay() {
     isPaused = false;
-      console.log("play");
+    //   console.log("play");
     pengesaArray.length = 0;
     }
-function shpjegime(){
-   const info1 = document.getElementById("info1"); 
- document.getElementById("shpjegimBtn").onclick = () => {
-      const info1 = document.getElementById("info1"); 
-    togglePause(); 
-    info1.style.display = "block";
+// function shpjegime(){
+//    const info1 = document.getElementById("info1"); 
+//  document.getElementById("shpjegimBtn").onclick = () => {
+//       const info1 = document.getElementById("info1"); 
+//     togglePause(); 
+//     info1.style.display = "block";
    
-}
-   document.getElementById("closeInfo1").onclick = () => {info1.style.display = "none";
-    togglePlay();
-   }
-};
+// }
+//    document.getElementById("closeInfo1").onclick = () => {info1.style.display = "none";
+//     togglePlay();
+//    }
+// };
 
      function hideReplayBtn( visible) {
         if (!visible) {
@@ -398,59 +401,119 @@ const run = async()=>{
     window.addEventListener('resize', updateCanvasDimensions);
     
 
-    setInterval(async()=>{
-        let faceAIData = await faceapi.detectAllFaces(videoFeedEl)
-        .withFaceLandmarks()
-        .withFaceDescriptors()
-        .withAgeAndGender()
-        .withFaceExpressions();
-        console.log(faceAIData)
+    // setInterval(async()=>{
+    //     let faceAIData = await faceapi.detectAllFaces(videoFeedEl)
+    //     .withFaceLandmarks()
+    //     .withFaceDescriptors()
+    //     .withAgeAndGender()
+    //     .withFaceExpressions();
+    //     console.log(faceAIData)
 
-        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
-        faceAIData = faceapi.resizeResults(faceAIData, videoFeedEl);
+    //     canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
+    //     faceAIData = faceapi.resizeResults(faceAIData, videoFeedEl);
 
-        // faceapi.draw.drawDetections(canvas,faceAIData)
-        //  faceapi.draw.drawFaceLandmarks(canvas,faceAIData);
-        // faceapi.draw.drawFaceExpressions(canvas,faceAIData);
+    //     // faceapi.draw.drawDetections(canvas,faceAIData)
+    //     //  faceapi.draw.drawFaceLandmarks(canvas,faceAIData);
+    //     // faceapi.draw.drawFaceExpressions(canvas,faceAIData);
 
-    let emotionText = "";
+    // let emotionText = "";
 
-         faceAIData.forEach(face => {
-        //      const{age, gender, genderProbability} = face
-        //      const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
-        //  const ageText =`${Math.round(age)} vjec`
-        // const textField = new faceapi.draw.DrawTextField(
-        //     [genderText, ageText],  // Text to display
-        //      face.detection.box.topRight // Position
-        //  )
-        const expressions = face.expressions;
-        const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
-        const topEmotion = sorted[0][0];
+    //      faceAIData.forEach(face => {
+    //     //      const{age, gender, genderProbability} = face
+    //     //      const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
+    //     //  const ageText =`${Math.round(age)} vjec`
+    //     // const textField = new faceapi.draw.DrawTextField(
+    //     //     [genderText, ageText],  // Text to display
+    //     //      face.detection.box.topRight // Position
+    //     //  )
+    //     const expressions = face.expressions;
+    //     const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
+    //     const topEmotion = sorted[0][0];
 
-        switch (topEmotion) {
-            case 'happy':
-                allhappyCount++
-                happyCount++;
-                break;
-            case 'sad':
-                allsadCount++;
-                sadCount++;
-                break;
-            case 'disgusted':
-                alldisgustedCount++;
-                break;
-                case 'angry':
-                allangryCount++;
-                break;
-            case 'neutral':
-                allneutralCount++;
-                break;
-            case 'surprised':
-                allsurprisedCount++;
-                break;
-        } 
+    //     switch (topEmotion) {
+    //         case 'happy':
+    //             allhappyCount++
+    //             happyCount++;
+    //             break;
+    //         case 'sad':
+    //             allsadCount++;
+    //             sadCount++;
+    //             break;
+    //         case 'disgusted':
+    //             alldisgustedCount++;
+    //             break;
+    //             case 'angry':
+    //             allangryCount++;
+    //             break;
+    //         case 'neutral':
+    //             allneutralCount++;
+    //             break;
+    //         case 'surprised':
+    //             allsurprisedCount++;
+    //             break;
+    //     } 
 
-        if(happyCount==10){
+    //     if(happyCount==10){
+    //        velocityx = -5; 
+    //        console.log("ke be 10 happy");
+    //     }
+    //     else if(happyCount==30){
+    //        velocityx = -6; 
+    //        console.log("ke be 30 happy");
+    //         happyCount=0;
+    //     }
+    //     else if(sadCount==5 && velocityx!=-4){
+    //        velocityx = -4; 
+    //        console.log("ke be 5 sad");
+    //         sadCount=0;
+    //         happyCount=0;
+    //     }
+    //     // else if(fearfulCount==10){
+    //     //     window.alert("10 fearefull");
+    //     // }
+    //     emotionText += `Emocion: ${topEmotion}<br>`;
+    //  })
+    // },1000)
+
+    setInterval(async () => {
+  let faceAIData = await faceapi.detectSingleFace(videoFeedEl)
+    .withFaceLandmarks()
+    .withFaceDescriptor()
+    .withAgeAndGender()
+    .withFaceExpressions();
+     console.log(faceAIData)
+
+  if (!faceAIData) {
+    console.log("Nuk eshte dedektuar asnje fytyre");
+    return;
+  }
+
+  canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
+  faceAIData = faceapi.resizeResults(faceAIData, videoFeedEl);
+
+
+//   faceapi.draw.drawDetections(canvas, faceAIData);
+//   faceapi.draw.drawFaceLandmarks(canvas, faceAIData);
+//   faceapi.draw.drawFaceExpressions(canvas, faceAIData);
+
+  let emotionText = "";
+
+ 
+  const expressions = faceAIData.expressions;
+  const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
+  const topEmotion = sorted[0][0];
+
+  switch (topEmotion) {
+    case 'happy': allhappyCount++; happyCount++; break;
+    case 'sad': allsadCount++; sadCount++; break;
+    case 'disgusted': alldisgustedCount++; break;
+    case 'angry': allangryCount++; break;
+    case 'neutral': allneutralCount++; break;
+    case 'surprised': allsurprisedCount++; break;
+  }
+
+  
+   if(happyCount==10){
            velocityx = -5; 
            console.log("ke be 10 happy");
         }
@@ -469,8 +532,9 @@ const run = async()=>{
         //     window.alert("10 fearefull");
         // }
         emotionText += `Emocion: ${topEmotion}<br>`;
-     })
-    },1000)
+
+}, 1000);
+
 } 
  
 function saveGame() {
