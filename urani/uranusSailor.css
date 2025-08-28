@@ -9,7 +9,7 @@ body{
     position: absolute;
     top: 10px;
     left: 10px;
-    z-index: 100; /* Higher than canvas */
+    z-index: 100; 
 }
 
 #info1 {
@@ -18,7 +18,7 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 200;
-    background: white;
+    /* background: white; */
     padding: 20px;
 }
 #pauseBtn{
@@ -55,7 +55,7 @@ body{
 
 #contanierface{
         display: none;
-        justify-content: center;
+        /* display: block; */
     }
 #canvasface{
         position: absolute;
@@ -78,7 +78,7 @@ body{
 
     .close-btn {
       background-color: transparent;
-      color: white;
+      /* color: white; */
       border: none;
      margin-bottom: -10%;
       margin-left:170px;

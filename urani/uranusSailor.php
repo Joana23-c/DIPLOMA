@@ -26,7 +26,7 @@ if (!isset($_SESSION['user_id'])) {
    <div id="hidden">
 <button>Luaj perseri!</button>
 </div> 
-<div id="info1" class="info">
+  <div id="info1" class="info">
         <div class="info-content">
          <button class="close-btn" id="closeInfo1"><img src="./images/crossred.png"></button> 
          <p> 
