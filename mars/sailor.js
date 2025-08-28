@@ -203,7 +203,7 @@ if (frame.y > framey) {
 //    velocityx = -6;
 //  }
  
- if(coins >= 20){
+ if(coins >= 20){ //150
     context.fillStyle = "red";
     context.font = "25px courier";
     context.fillText("Ti fitove !", 300, 125);

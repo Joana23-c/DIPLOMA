@@ -1,22 +1,19 @@
 
-   console.log(faceapi);
-   
-   let canvas;
-    let canvasWidth=750;
-    let canvasHeight=250;
-   let ctx;
-
-   let sailor;
-
-    const frameWidth = 100;
-    const frameHeight = 100;
-    const numFrames = 5;
-    let currentFrame = 0;
-
-    let framex = 50;
-let framey = canvasHeight - 66;
+console.log(faceapi);
+let board;
+let boardwidth=750;
+let boardheight=250;
+let context;
 
 
+
+const frameWidth = 100;
+const frameHeight = 100;
+const numFrames = 5;
+let currentFrame = 0;
+let framex = 50;
+let framey = boardheight - 66;
+let sailor;
 
 let frame = {
     x: framex,
@@ -25,13 +22,13 @@ let frame = {
     height: frameHeight
 };
 
-const groundY = canvasHeight - 66;
+const groundY = boardheight - 66;
 
 let frameTimer = 0;
-const frameInterval = 150; // ms
+const frameInterval = 150; 
 let lastFrameTime = 0;
 
-let currentAnimation = "Walking"; // or "Attack" or scroll
+let currentAnimation = "Walking";
 let playedAttackOnce = false;
 let x = 0;
 
@@ -42,7 +39,7 @@ let pengesa2width = 69;
 let pengesa3width = 70;
 let pengesaheight = 80;
 let pengesax = 700;
-let pengesay = canvasHeight - pengesaheight;
+let pengesay = boardheight - pengesaheight;
 
 let pengesa1img;
 let pengesa2img;
@@ -87,7 +84,10 @@ window.onload = function() {
 
     document.getElementById("pauseBtn").addEventListener("click", togglePause);
     document.getElementById("playBtn").addEventListener("click", togglePlay);
-    document.getElementById("shpjegimBtn").addEventListener("click", shpjegime);
+    document.getElementById("shpjegimBtn").addEventListener("click", () => {
+    togglePause();
+    document.getElementById("info1").style.display = "block";
+     });
     document.getElementById("closeInfo1").addEventListener("click", () => {
         document.getElementById("info1").style.display = "none";
         togglePlay();
@@ -95,14 +95,13 @@ window.onload = function() {
 
     run();
      setTimeout(() => {
-    canvas = document.getElementById('canvas');
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-    ctx = canvas.getContext('2d');
+    board = document.getElementById('canvas');
+    board.width = boardwidth;
+    board.height = boardheight;
+    context = board.getContext('2d');
 
 
     sailor = new Image();
-    
     sailor.src = './images/Walking_KG_2.png';
     
     pengesa1img = new Image();
@@ -156,7 +155,7 @@ function update(timestamp) {
     }
 
 
-     ctx.clearRect(0, 0, canvas.width, canvas.height);
+     context.clearRect(0, 0, board.width, board.height);
 
       velocityy += gravity; 
 
@@ -166,7 +165,6 @@ if (frame.y > framey) {
     velocityy = 0;
 }
 
-      // Use timestamp for smoother animation
     if (!lastFrameTime) lastFrameTime = timestamp;
     let deltaTime = timestamp - lastFrameTime;
     frameTimer += deltaTime;
@@ -190,7 +188,7 @@ if (frame.y > framey) {
         currentAnimation = "Walking";
     } 
 
-     ctx.drawImage(
+     context.drawImage(
         sailor,
         currentFrame * frameWidth, 0,
         frameWidth, frameHeight,
@@ -203,75 +201,66 @@ if (frame.y > framey) {
         let pengesa = pengesaArr[i];
         pengesa.x += velocityx;
          
-        ctx.drawImage(pengesa.img, pengesa.x, pengesa.y, pengesa.width, pengesa.height);
+        context.drawImage(pengesa.img, pengesa.x, pengesa.y, pengesa.width, pengesa.height);
 
         if(detectCollision(frame,pengesa)){
-                if (pengesa.img == pengesa4) {
-        if (currentAnimation !== "Scroll") {
-            gameover = true;
-            gameOverSound.currentTime = 0; 
-                gameOverSound.play();
-                replayVisible = true;
-                hideReplayBtn(replayVisible);
-        }}
-            else if(pengesa.img != goldcoin && 
+             if (pengesa.img == pengesa4) {
+                if (currentAnimation !== "Scroll") {
+                     gameover = true;
+                     gameOverSound.currentTime = 0; 
+                      gameOverSound.play();
+                      replayVisible = true;
+                      hideReplayBtn(replayVisible);
+                    }
+                }
+                else if(pengesa.img != goldcoin && 
                  pengesa.img != alien1 &&
-                  pengesa.img != alien2
+                 pengesa.img != alien2
                 ){
-                gameover= true;
-                gameOverSound.currentTime = 0; 
-                gameOverSound.play();
-                replayVisible = true;
-                hideReplayBtn(replayVisible);
-            }else if(pengesa.img == goldcoin){ 
-               coinSound.currentTime = 0; 
-                    coinSound.play();    
-            coins+=10;
-             pengesaArr.splice(i, 1);
-               i--;
-            }else if(pengesa.img == alien1 || pengesa.img == alien2 ){
-                if(currentAnimation === "Attack"){
+                    gameover= true;
+                    gameOverSound.currentTime = 0; 
+                    gameOverSound.play();
+                    replayVisible = true;
+                    hideReplayBtn(replayVisible);
+                }else if(pengesa.img == goldcoin){ 
                     coinSound.currentTime = 0; 
-                    coinSound.play();   
-                    coins+=5;
-                     pengesaArr.splice(i, 1);
-                     i--;
-                     }else
+                    coinSound.play();    
+                    coins+=10;
+                    pengesaArr.splice(i, 1);
+                    i--;
+                }else if(pengesa.img == alien1 || pengesa.img == alien2 ){
+                    if(currentAnimation === "Attack"){
+                        coinSound.currentTime = 0; 
+                        coinSound.play();   
+                        coins+=5;
+                        pengesaArr.splice(i, 1);
+                        i--;
+                    }else
                      { 
                         gameover = true;
                         gameOverSound.currentTime = 0; 
                         gameOverSound.play();
                         replayVisible = true;
                     }
-            } 
+                } 
 
         }
 
-    ctx.fillStyle = "white";
-    ctx.font = "20px courier";
+    context.fillStyle = "white";
+    context.font = "20px courier";
     score++;
-    ctx.fillText(score, 5, 20);
-    /*x = 5: the horizontal position (5 pixels from the left edge).
-y = 20: the vertical position (20 pixels from the top). */
-
-    ctx.fillStyle = "white";
-    ctx.font = "20px courier";
-    ctx.fillText(coins, 700, 20); 
+    context.fillText(score, 5, 20);
+    context.fillStyle = "white";
+    context.font = "20px courier";
+    context.fillText(coins, 700, 20); 
 
 
  }
 
-//  if(coins == 20  || coins == 25){
-//     velocityx = -5;
-//  }
-//   if(coins==55 || coins == 60){
-//    velocityx = -6;
-//  }
-
  if(coins == 30){//300
-    ctx.fillStyle = "navy";
-    ctx.font = "25px courier";
-    ctx.fillText("Ti fitove !", 300, 125); 
+    context.fillStyle = "navy";
+    context.font = "25px courier";
+    context.fillText("Ti fitove !", 300, 125); 
     win.currentTime = 0; 
     win.play();
     gameover=true;
@@ -332,14 +321,14 @@ function placepengesa() {
         pengesa.img = alien1;
         pengesa.width = alien1width;
          pengesa.height = ailen1height; 
-         pengesa.y=canvasHeight - 50;
+         pengesa.y=boardheight - 50;
           pengesaArr.push(pengesa);
         
     }else if(placepengesachance > 0.40){
         pengesa.img = alien2;
         pengesa.width = alien1width;
          pengesa.height = ailen1height; 
-         pengesa.y=canvasHeight - 150;
+         pengesa.y=boardheight - 150;
           pengesaArr.push(pengesa);
     }else if (placepengesachance > 0.30) {
         pengesa.img = pengesa1img;
@@ -404,9 +393,9 @@ function togglePlay() {
 
      function hideReplayBtn( visible) {
         if (!visible) {
-            replayBtn.style.display = 'none'; // fsheh section-in
+            replayBtn.style.display = 'none'; 
         } else {
-            replayBtn.style.display = 'block'; // Shfaq section-in
+            replayBtn.style.display = 'block'; 
         }
     }
 
@@ -418,25 +407,18 @@ function togglePlay() {
      sadCount=0;
     replayVisible = false;
     hideReplayBtn(replayVisible);
-    for(let i=0;i<5;i++){
+    for(let i=0;i<7;i++){
         pengesaArr.pop();
     }
     gameover=false;
+    happyCount = 0;
+    sadCount = 0;
+    allhappyCount = 0;
+    allsadCount = 0;
+    allneutralCount = 0;
+    alldisgustedCount = 0;
+    allsurprisedCount = 0;
    }
-
-   function shpjegime(){
-   const info1 = document.getElementById("info1"); 
- document.getElementById("shpjegimBtn").onclick = () => {
-    // console.log("x");
-   togglePause(); 
-  info1.style.display = "block";
-   
-}
-   document.getElementById("closeInfo1").onclick = () => {info1.style.display = "none";
-    togglePlay();
-   }
-};
-
 
 let happyCount = 0;
 let sadCount = 0;
@@ -449,9 +431,6 @@ let allsurprisedCount = 0;
 
 
 const run = async()=>{
-
-
-    
     const stream = await navigator.mediaDevices.getUserMedia({
         video:true,
         audio: false,
@@ -481,55 +460,41 @@ const run = async()=>{
     window.addEventListener('resize', updateCanvasDimensions);
     
 
-    setInterval(async()=>{
-        let faceAIData = await faceapi.detectAllFaces(videoFeedEl)
-        .withFaceLandmarks()
-        .withFaceDescriptors()
-        .withAgeAndGender()
-        .withFaceExpressions();
-        console.log(faceAIData)
+    setInterval(async () => {
+  let faceAIData = await faceapi.detectSingleFace(videoFeedEl)
+    .withFaceLandmarks()
+    .withFaceDescriptor()
+    .withAgeAndGender()
+    .withFaceExpressions();
+     console.log(faceAIData)
 
-        canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
-        faceAIData = faceapi.resizeResults(faceAIData, videoFeedEl);
+  if (!faceAIData) {
+    console.log("Nuk eshte dedektuar asnje fytyre");
+    return;
+  }
 
-    let emotionText = "";
+  canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height)
+  faceAIData = faceapi.resizeResults(faceAIData, videoFeedEl);
 
-         faceAIData.forEach(face => {
-             const{age, gender, genderProbability} = face
-             const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
-         const ageText =`${Math.round(age)} vjec`
-        const textField = new faceapi.draw.DrawTextField(
-            [genderText, ageText],  // Text to display
-             face.detection.box.topRight // Position
-         )
-        const expressions = face.expressions;
-        const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
-        const topEmotion = sorted[0][0];
 
-        switch (topEmotion) {
-            case 'happy':
-                allhappyCount++
-                happyCount++;
-                break;
-            case 'sad':
-                allsadCount++;
-                sadCount++;
-                break;
-            case 'disgusted':
-                alldisgustedCount++;
-                break;
-                case 'angry':
-                allangryCount++;
-                break;
-            case 'neutral':
-                allneutralCount++;
-                break;
-            case 'surprised':
-                allsurprisedCount++;
-                break;
-        } 
+//   faceapi.draw.drawDetections(canvas, faceAIData);
+//   faceapi.draw.drawFaceLandmarks(canvas, faceAIData);
+//   faceapi.draw.drawFaceExpressions(canvas, faceAIData);
 
-        if(happyCount==10){
+  const expressions = faceAIData.expressions;
+  const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
+  const topEmotion = sorted[0][0];
+
+  switch (topEmotion) {
+    case 'happy': allhappyCount++; happyCount++; break;
+    case 'sad': allsadCount++; sadCount++; break;
+    case 'disgusted': alldisgustedCount++; break;
+    case 'angry': allangryCount++; break;
+    case 'neutral': allneutralCount++; break;
+    case 'surprised': allsurprisedCount++; break;
+  }
+
+   if(happyCount==10){
            velocityx = -5; 
            console.log("ke be 10 happy");
         }
@@ -544,12 +509,7 @@ const run = async()=>{
             sadCount=0;
             happyCount=0;
         }
-        // else if(fearfulCount==10){
-        //     window.alert("10 fearefull");
-        // }
-        emotionText += `Emocion: ${topEmotion}<br>`;
-     })
-    },1000)
+}, 1000);
 } 
  
 function saveGame() {
@@ -571,5 +531,5 @@ function saveGame() {
     })
     .then(response => response.text())
     .then(data => console.log("Save status:", data))
-    .catch(error => console.error("Error saving game:", error));
+    .catch(error => console.error("Error ne ruajtjen e lojes:", error));
 }
