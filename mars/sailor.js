@@ -111,7 +111,7 @@ window.onload = function () {
         setInterval(placepengesa, 1000);
   
 
-    }, 5000); // 5 sekonda pritje per tu bere load face api 
+    }, 5000); 
    
 
 }
@@ -283,14 +283,12 @@ function placepengesa() {
         pengesaArray.shift();
     }
 }
-//funksioni per jump
 function movesailor(e){
     if(gameover){
         return;
     }
 
     if((e.code == "Space" || e.code == "ArrowUp") && frame.y==groundY ){
-        //jump
         velocityy = -11; 
         jumpSound.currentTime = 0; 
         jumpSound.play();
@@ -371,8 +369,6 @@ let allsurprisedCount = 0;
 
 const run = async()=>{
 
-
-    
     const stream = await navigator.mediaDevices.getUserMedia({
         video:true,
         audio: false,
@@ -556,5 +552,5 @@ function saveGame() {
     })
     .then(response => response.text())
     .then(data => console.log("Save status:", data))
-    .catch(error => console.error("Error saving game:", error));
+    .catch(error => console.error("Error ne ruajtjen e lojes:", error));
 }

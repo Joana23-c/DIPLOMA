@@ -8,78 +8,75 @@ if (!isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planeti Uran</title>
-    <link rel="icon" href="./images/uranus.png">
-      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planeti Uran</title>
+  <link rel="icon" href="./images/uranus.png">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <style>
+    @media (min-width: 910px) {
+      body, html {
+        overflow: hidden;
+      }
+    }
+    body{
+      width: 100vw; 
+      height: 100vh;
+      background-image: url("./images/Blue_Nebula_08-1024x1024.png");
+      font-family:'press Start 2P', Courier, monospace;
+      color: #32CD32;
+    }
+    h1{
+      text-align:center;
+      font-size:30px;
+      text-shadow:5px 5px 10px rgba(44, 162, 33, 0.975);
+      margin-top: 40px;
+    }
     
+    #sailordiv {
+      margin-top: 20px;
+      margin-left: 5%;
+      margin-right: 5%;
+      height: 70vh;
+      width: 35%;
+      background-image: url("./images/image.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      display: flex;
+      justify-content: center;  
+      align-items: center;      
+      transform : scale(1.7);
+      float: left;
+    }
     
-    <style>
-        @media (min-width: 910px) {
-        body, html {
-  overflow: hidden;
-}
-}
-
-       body{
-       width: 100vw; 
-       height: 100vh;
-    background-image: url("./images/Blue_Nebula_08-1024x1024.png");
+    #sailor {
+      padding-right: 11%;  
+    } 
     
+    @media (max-width: 880px) {
+      #sailor {
+        transform: scale(0.5);
+        padding-right: 20%;  
+      }
+    }
     
-    font-family:'press Start 2P', Courier, monospace;
-    color: #32CD32;
-}
-h1{
-    text-align:center;
-    font-size:30px;
-    text-shadow:5px 5px 10px rgba(44, 162, 33, 0.975);
-     margin-top: 40px;
-}
-
-#sailordiv {
-  margin-top: 20px;
-  margin-left: 5%;
-  margin-right: 5%;
-  height: 70vh;
-  width: 35%;
-  background-image: url("./images/image.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  display: flex;
-  justify-content: center;  /* horizontally center */
-  align-items: center;      /* vertically center */
-     transform : scale(1.7);
-  float: left;
-}
-
-#sailor {
-   padding-right: 11%;  
-} 
-@media (max-width: 880px) {
-#sailor {
-    transform: scale(0.5);
-      padding-right: 20%;  
-}
-}
-
-#mission p{
-    display: flex;
-     margin-top:80px;
-     margin-left:10%;
-     margin-right:3%;
-     background-color: rgba(19, 18, 18, 0.811);
-     font-size:13px;
+    #mission p{
+      display: flex;
+      margin-top:80px;
+      margin-left:10%;
+      margin-right:3%;
+      background-color: rgba(19, 18, 18, 0.811);
+      font-size:13px;
       line-height: 1.7;
-      /* letter-spacing: 2px; */
-     padding: 15px;
-     box-shadow: 0 4px 6px rgb(0, 0, 0);
-}
-#mission button{
-     display: block;
-     margin: 20px auto 0 auto;
+      padding: 15px;
+      box-shadow: 0 4px 6px rgb(0, 0, 0);
+     }
+      
+     #mission button{
+      display: block;
+      margin: 20px auto 0 auto;
       text-align: center;
       color: #32CD32;
       background-color: rgb(19, 18, 18);
@@ -91,19 +88,14 @@ h1{
       overflow: hidden;
       transform: scale(1.2);
       animation: pulse 2s infinite;
-}
- @keyframes pulse {
-  0% {
-    transform: scale(1.2);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-   transform: scale(1.2);
-  }
- }
-      </style>
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1.2);}
+      50% {transform: scale(1.5);}
+      100% {transform: scale(1.2);}
+    }
+  </style>
 </head>
 <body>
     <h1>Mirë se erdhët në planetin Uran !</h1>
@@ -122,7 +114,7 @@ h1{
   const ctx = canvas.getContext('2d');
 
   const sailor = new Image();
-  sailor.src = "./images/Power_Up_KG_1.png"; // Make sure the image path is correct
+  sailor.src = "./images/Power_Up_KG_1.png"; 
 
   const frameWidth = 100;
   const frameHeight = 100;
