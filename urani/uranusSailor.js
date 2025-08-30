@@ -5,14 +5,12 @@ let boardwidth=750;
 let boardheight=250;
 let context;
 
-
-
 const frameWidth = 100;
-const frameHeight = 100;
+const frameHeight = 64;
 const numFrames = 5;
 let currentFrame = 0;
-let framex = 50;
-let framey = boardheight - 66;
+let framex = 0;
+let framey = boardheight - 64;
 let sailor;
 
 let frame = {
@@ -22,7 +20,7 @@ let frame = {
     height: frameHeight
 };
 
-const groundY = boardheight - 66;
+const groundY = boardheight - 64;
 
 let frameTimer = 0;
 const frameInterval = 150; 
@@ -71,8 +69,6 @@ let win = new Audio("./sounds/win.wav");
 
 let replayBtn;
 let replayVisible = false;
-
-
 
 window.onload = function() {
 

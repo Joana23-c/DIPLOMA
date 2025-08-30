@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Uranus</title>
@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_id'])) {
           <img src="./images/upload.png" id="arrowup" width="24px" height="24px">  <img src="./images/equal-mathematical-sign.png" width="24px" height="24px"> <img src="./images/boy.png"><br>
           <img src="./images/space.png"> <img src="./images/equal-mathematical-sign.png" width="24px" height="24px"> <img src="./images/slash.png" ><br>
           <img src="./images/down-arrow.png"> <img src="./images/equal-mathematical-sign.png" width="24px" height="24px"> <img src="./images/man.png">
-          <p>
+        </p>
          
          </div>
   </div>
