@@ -18,7 +18,7 @@ h1{
     float:left;
 }
 #mission p{
-    display: flex;
+    /* display: flex; */
      margin-top:80px;
      margin-left:6%;
      margin-right:3%;

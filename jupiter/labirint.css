@@ -1,4 +1,4 @@
-body {
+/* body {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -9,7 +9,6 @@ body {
     left: 0;
     right: 0;
     background-image: url('./images/Green_Nebula_05-1024x1024.png');
-    /* background-color: #fff; */
     font-family: 'Poppins', sans-serif;
 }
 
@@ -108,4 +107,102 @@ input:active {
     }
 #canvasface{
         position: absolute;
+    } 
+    */
+
+body{ 
+   font-family:'Courier New', Courier, monospace;
+   text-align: center;
+   background-image: url("./images/Green_Nebula_05-1024x1024.png");  
+
+}
+#quitBtn {
+  position: fixed; 
+  top: 20px;         
+  left: 20px;        
+  z-index: 2000;     
+  cursor: pointer;
+}
+
+#quitBtn img {
+  transform: scale(0.6);
+  display: block;   /* avoids inline spacing issues */
+}
+#view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;   /* fill screen height */
+  width: 100vw;    /* fill screen width */
+  overflow: hidden;
+}
+#mazeCanvas {
+  display: block;
+  max-width: 90vmin;   /* keep proportions: vmin = min(viewport width, height) */
+  max-height: 90vmin;
+  width: 100%;
+  height: auto;
+}
+
+/* @media (min-width: 860px) {
+  #mazeCanvas{
+    margin-top: -180px;
+    transform: scale(0.5);
+}
+}
+@media (max-width: 859px) {
+ #mazeCanvas{
+    transform: scale(0.8);
+}
+} */
+
+#Message-Container{
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      display: none;
+      /* display: block; */
+      position: fixed;
+      z-index: 1;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.718);
+}
+#message{
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+#okBtn{
+    margin-left: 10px;
+    /* margin-top: -5px; */
+}
+button {
+  cursor: pointer;
+  height: 45px;
+  width: 150px;
+  /* margin: 5px; */
+  margin-top:80px;
+  margin-left: -10px;
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid green;
+  border-radius: 5px;
+  /* transition: background-color 0.2s ease; */
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#contanierface{
+        display: none;
+        /* display: block; */
     }
+#canvasface{
+        position: absolute;
+    }
+

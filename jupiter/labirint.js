@@ -13,20 +13,29 @@ function shuffle(a) {
   }
  
   function winMsg(moves) {
-    moves=moves+1;
     console.log(moves);
+    console.log
+    ({
+    levizje : moves,
+    happy: allhappyCount,
+    sad: allsadCount,
+    disgusted: alldisgustedCount,
+    angry: allangryCount,
+    neutral: allneutralCount,
+    surprised: allsurprisedCount
+    });
+    saveGame();
+    document.getElementById("Message-Container").style.display = "block";
     document.getElementById("moves").innerHTML = "Ti ke bërë " + moves + " lëvizje.";
-    // toggleVisablity("Message-Container");  
-    document.getElementById("Message-Container").style.visibility = "visible";
   }
   
-  function toggleVisablity(id) {
-    if (document.getElementById(id).style.visibility == "visible") {
-      document.getElementById(id).style.visibility = "hidden";
-    } else {
-      document.getElementById(id).style.visibility = "visible";
-    }
-  }
+  // function toggleVisablity(id) {
+  //   if (document.getElementById(id).style.visibility == "visible") {
+  //     document.getElementById(id).style.visibility = "hidden";
+  //   } else {
+  //     document.getElementById(id).style.visibility = "visible";
+  //   }
+  // }
   
   function Maze(Width, Height) {
     var mazeMap;
@@ -268,6 +277,7 @@ function shuffle(a) {
   function Player(maze, c, _cellsize, onComplete, sprite = null) {
     var ctx = c.getContext("2d");
     var drawSprite;
+    var hasWon = false;
     // var moves = 0;
 
     if (sprite != null) {
@@ -301,7 +311,8 @@ function shuffle(a) {
         cellSize - offsetRight,
         cellSize - offsetRight
       );
-      if (coord.x === maze.endCoord().x && coord.y === maze.endCoord().y) {
+      if (!hasWon && coord.x === maze.endCoord().x && coord.y === maze.endCoord().y) {
+        hasWon = true;  
         onComplete(moves);
         player.unbindKeyDown();
       }
@@ -319,6 +330,11 @@ function shuffle(a) {
     }
   
 function check(e) {
+
+   if ([37, 38, 39, 40].includes(e.keyCode)) {
+    e.preventDefault(); // stop the browser from scrolling
+  }
+
   var cell = map[cellCoords.x][cellCoords.y];
   let canMove = false;
   let newCoords = { x: cellCoords.x, y: cellCoords.y };
@@ -351,8 +367,9 @@ function check(e) {
   if (canMove) {
     removeSprite(cellCoords);
     cellCoords = newCoords;
-    drawSprite(cellCoords);
     moves++;  // Rrit moves vetëm kur lëvizja bëhet
+    drawSprite(cellCoords);
+    
   }
 }
 
@@ -435,25 +452,39 @@ let viewHeight = view.offsetHeight;
     
   };
   
-  window.onresize = function() {
-  let view = document.getElementById("view");
-let viewWidth = view.offsetWidth;
-let viewHeight = view.offsetHeight;
+//   window.onresize = function() {
+//   let view = document.getElementById("view");
+// let viewWidth = view.offsetWidth;
+// let viewHeight = view.offsetHeight;
 
-    if (viewHeight < viewWidth) {
-      ctx.canvas.width = viewHeight - viewHeight / 100;
-      ctx.canvas.height = viewHeight - viewHeight / 100;
-    } else {
-      ctx.canvas.width = viewWidth - viewWidth / 100;
-      ctx.canvas.height = viewWidth - viewWidth / 100;
-    }
-    cellSize = mazeCanvas.width / difficulty;
-    if (player != null) {
-      draw.redrawMaze(cellSize);
-      player.redrawPlayer(cellSize);
-    }
-  };
-  
+//     if (viewHeight < viewWidth) {
+//       ctx.canvas.width = viewHeight - viewHeight / 100;
+//       ctx.canvas.height = viewHeight - viewHeight / 100;
+//     } else {
+//       ctx.canvas.width = viewWidth - viewWidth / 100;
+//       ctx.canvas.height = viewWidth - viewWidth / 100;
+//     }
+//     cellSize = mazeCanvas.width / difficulty;
+//     if (player != null) {
+//       draw.redrawMaze(cellSize);
+//       player.redrawPlayer(cellSize);
+//     }
+//   };
+  function resizeCanvas() {
+  let size = Math.min(window.innerWidth, window.innerHeight) * 0.9; // 90% of screen
+  ctx.canvas.width = size;
+  ctx.canvas.height = size;
+
+  cellSize = mazeCanvas.width / difficulty;
+  if (player != null) {
+    draw.redrawMaze(cellSize);
+    player.redrawPlayer(cellSize);
+  }
+}
+
+window.onresize = resizeCanvas;
+resizeCanvas(); // call once on load
+
   function makeMaze() {
     if (player != undefined) {
       player.unbindKeyDown();
@@ -468,47 +499,24 @@ let viewHeight = view.offsetHeight;
     maze = new Maze(difficulty, difficulty);
     draw = new DrawMaze(maze, ctx, cellSize, endImg);
     player = new Player(maze, mazeCanvas, cellSize, winMsg, sprite);
-    if (document.getElementById("mazeContainer").style.opacity < "100") {
-      document.getElementById("mazeContainer").style.opacity = "100";
-    }
+    // if (document.getElementById("mazeContainer").style.opacity < "100") {
+    //   document.getElementById("mazeContainer").style.opacity = "100";
+    // }
   }
 //    function replay() {
 //   document.getElementById("Message-Container").style.visibility = "hidden";
 //   makeMaze();
 // }
 async function replay() {
-  document.getElementById("Message-Container").style.visibility = "hidden";
-  if(happyCount>sadCount){
+  document.getElementById("Message-Container").style.display = "none";
     console.log(happyCount);
     console.log(sadCount);
-        console.log({
-    happy: allhappyCount,
-    sad: allsadCount,
-    disgusted: alldisgustedCount,
-    angry: allangryCount,
-    neutral: allneutralCount,
-    surprised: allsurprisedCount
-});
-     saveGame();
-      moves=0;
+  if(happyCount>sadCount){
       difficulty=15
-      
-     happyCount = 0;
-     sadCount = 0;
-     allhappyCount = 0;
-     allsadCount = 0;
-     allangryCount = 0;
-     allneutralCount = 0;
-     alldisgustedCount = 0;
-     allsurprisedCount = 0;
-   
   }else{
-     console.log(happyCount);
-    console.log(sadCount);
-     saveGame();
-     moves=0;
      difficulty=10;
-
+  }
+     moves=0;
      happyCount = 0;
      sadCount = 0;
      allhappyCount = 0;
@@ -517,10 +525,15 @@ async function replay() {
      allneutralCount = 0;
      alldisgustedCount = 0;
      allsurprisedCount = 0;
-    
-
-  }
-
+//          console.log({
+//     levizje : moves,
+//     happy: allhappyCount,
+//     sad: allsadCount,
+//     disgusted: alldisgustedCount,
+//     angry: allangryCount,
+//     neutral: allneutralCount,
+//     surprised: allsurprisedCount
+// });
   makeMaze();
 }
 let happyCount = 0;
