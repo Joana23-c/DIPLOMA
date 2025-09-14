@@ -1,115 +1,3 @@
-/* body {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-image: url('./images/Green_Nebula_05-1024x1024.png');
-    font-family: 'Poppins', sans-serif;
-}
-
-#view {
-    margin-top: 30px;
-}
-
-#mazeContainer {
-    top: 15px;
-    opacity: 0;
-    display: inline-block;
-    margin: auto;
-    border-radius: 10px;
-}
-
-#mazeContainer #mazeCanvas {
-    margin: 0;
-    display: block;
-    border: solid 2px rgba(27, 245, 16, 0.921);
-    height: 400px;
-}
-input {
-     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.30);
-    height: 45px;
-    width: 150px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    display: inline-block;
-    font-size: 15px;
-    text-align: center;
-    text-decoration: none;
-    appearance: none;
-}
-input:hover {
-	background-color: rgba(0, 0, 0, 0.70);
-}
-input:active {
-	background-color: black;
-}
-
-#Message-Container {
-  visibility: hidden;
-  position: absolute;
-  color: white;
-    display: block;
-    width: 100vw;
-    height: 100vh;
-  text-align: center;
-   top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.30);
-  z-index: 999;
-}
-#Message-Container #message {
-    width: 300px;
-    height: 300px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-left: -150px;
-    margin-top: -150px;
-}
-#page {
-	text-align: center;
-	height: auto;
-	width: auto;
-	margin: auto;
-}
-#page #view {
-    position: absolute;
-    top: 65px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: auto;
-}
-.border {
-    border: 10px black solid;
-    border-radius: 10px;
-}
- @media only screen and (max-width: 400px) {
-	input {
-	    width: 120px;
-	}
-} 
-
-#contanierface{
-        display: none;
-        justify-content: center;
-    }
-#canvasface{
-        position: absolute;
-    } 
-    */
-
 body{ 
    font-family:'Courier New', Courier, monospace;
    text-align: center;
@@ -126,36 +14,25 @@ body{
 
 #quitBtn img {
   transform: scale(0.6);
-  display: block;   /* avoids inline spacing issues */
+  display: block;   
 }
 #view {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;   /* fill screen height */
-  width: 100vw;    /* fill screen width */
+  height: 100vh;   
+  width: 100vw;    
   overflow: hidden;
 }
 #mazeCanvas {
   display: block;
-  max-width: 90vmin;   /* keep proportions: vmin = min(viewport width, height) */
+  max-width: 90vmin;   
   max-height: 90vmin;
   width: 100%;
   height: auto;
 }
 
-/* @media (min-width: 860px) {
-  #mazeCanvas{
-    margin-top: -180px;
-    transform: scale(0.5);
-}
-}
-@media (max-width: 859px) {
- #mazeCanvas{
-    transform: scale(0.8);
-}
-} */
-
+ 
 #Message-Container{
       font-family: Arial, sans-serif;
       padding: 40px;
@@ -192,7 +69,6 @@ button {
   background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid green;
   border-radius: 5px;
-  /* transition: background-color 0.2s ease; */
 }
 
 button:hover {

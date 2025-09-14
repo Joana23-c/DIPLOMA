@@ -471,7 +471,7 @@ const run = async()=>{
     //  })
     // },1000)
 
-    setInterval(async () => {
+   setInterval(async () => {
   let faceAIData = await faceapi.detectSingleFace(videoFeedEl)
     .withFaceLandmarks()
     .withFaceDescriptor()
