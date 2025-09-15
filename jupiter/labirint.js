@@ -45,60 +45,37 @@ function shuffle(a){
 
 function createMaze(width,height){
   mazeMap = new Array(height);
-  for(let x=0;x<height;x++){
-    mazeMap[x] = new Array(width);
-    for(let y=0;y<width;y++){
-      mazeMap[x][y] = {
+  for(let i=0;i<height;i++){
+    mazeMap[i] = new Array(width);
+    for(let j=0;j<width;j++){
+      mazeMap[i][j] = {
          n:false,
          s:false,
          e:false,
          w:false,
          visited:false, 
-         priorPos:null };
+         priorPos:null 
+        };
     }
   }
-   switch (rand(4)) {
-        case 0:
-          startCoord = {
-            x: 0,
-            y: 0
-          };
-          endCoord = {
-            x: height - 1,
-            y: width - 1
-          };
-          break;
-        case 1:
-          startCoord = {
-            x: 0,
-            y: width - 1
-          };
-          endCoord = {
-            x: height - 1,
-            y: 0
-          };
-          break;
-        case 2:
-          startCoord = {
-            x: height - 1,
-            y: 0
-          };
-          endCoord = {
-            x: 0,
-            y: width - 1
-          };
-          break;
-        case 3:
-          startCoord = {
-            x: height - 1,
-            y: width - 1
-          };
-          endCoord = {
-            x: 0,
-            y: 0
-          };
-          break;
-      }
+    switch (rand(4)) {
+    case 0:
+      startCoord = { x: 0, y: 0 };
+      endCoord = { x: width - 1, y: height - 1 };
+      break;
+    case 1:
+      startCoord = { x: width - 1, y: 0 };
+      endCoord = { x: 0, y: height - 1 };
+      break;
+    case 2:
+      startCoord = { x: 0, y: height - 1 };
+      endCoord = { x: width - 1, y: 0 };
+      break;
+    case 3:
+      startCoord = { x: width - 1, y: height - 1 };
+      endCoord = { x: 0, y: 0 };
+      break;
+  }
 
   let dirs = ["n","s","e","w"];
   let modDir = {
@@ -113,36 +90,33 @@ function createMaze(width,height){
   };
   let cellsVisited = 1;
   let numCells = width*height;
-  let numLoops=0, maxLoops=0;
+
   let isComp=false;
 
   while(!isComp){
-    mazeMap[pos.x][pos.y].visited=true;
+     mazeMap[pos.y][pos.x].visited = true;
     let move=false;
-    if(numLoops>=maxLoops){
+
       shuffle(dirs);
-      maxLoops=rand(height/8);
-      numLoops=0;
-    }
-    numLoops++;
+
     for(let i=0;i<dirs.length;i++){
       let d=dirs[i];
       let nx=pos.x+modDir[d].x;
       let ny=pos.y+modDir[d].y;
-      if(nx>=0 && ny>=0 && nx<width && ny<height && !mazeMap[nx][ny].visited){
-        mazeMap[pos.x][pos.y][d]=true;
-        mazeMap[nx][ny][modDir[d].o]=true;
-        mazeMap[nx][ny].priorPos={
-          x:pos.x,
-          y:pos.y
-        };
-        pos={x:nx,y:ny};
+
+      if(nx>=0 && ny>=0 && nx<width && ny<height && !mazeMap[ny][nx].visited){
+       mazeMap[pos.y][pos.x][d] = true;
+        mazeMap[ny][nx][modDir[d].o] = true;
+        mazeMap[ny][nx].priorPos = { x: pos.x, y: pos.y };
+
+        pos = { x: nx, y: ny };
+
         cellsVisited++;
         move=true;
         break;
       }
     }
-    if(!move) pos=mazeMap[pos.x][pos.y].priorPos;
+    if(!move) pos = mazeMap[pos.y][pos.x].priorPos;
     if(cellsVisited===numCells) isComp=true;
   }
 }
@@ -152,10 +126,11 @@ function drawMaze(ctx){
   ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
   ctx.lineWidth=cellSize/40;
   ctx.strokeStyle="lightgreen";
-  for(let x=0;x<mazeMap.length;x++){
-    for(let y=0;y<mazeMap[x].length;y++){
-      let c=mazeMap[x][y];
-      let px=x*cellSize, py=y*cellSize;
+   for (let y = 0; y < mazeMap.length; y++) {
+    for (let x = 0; x < mazeMap[y].length; x++) {
+      const c = mazeMap[y][x];
+      const px = x * cellSize; 
+      const py = y * cellSize; 
       if(!c.n){ 
         ctx.beginPath();
         ctx.moveTo(px,py);
@@ -220,7 +195,7 @@ function removePlayer(ctx){
 
 
 function move(dx,dy){
-  let cell = mazeMap[playerX][playerY];
+  const cell = mazeMap[playerY][playerX];
   let canMove=false;
    let nx=playerX, ny=playerY; 
   if(dx===-1 && cell.w) { canMove=true; nx=playerX-1; }
