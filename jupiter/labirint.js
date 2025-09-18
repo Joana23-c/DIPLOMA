@@ -124,34 +124,34 @@ function createMaze(width,height){
 
 function drawMaze(ctx){
   ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
-  ctx.lineWidth=cellSize/40;
+  ctx.lineWidth=cellSize/30;
   ctx.strokeStyle="lightgreen";
-   for (let y = 0; y < mazeMap.length; y++) {
-    for (let x = 0; x < mazeMap[y].length; x++) {
-      const c = mazeMap[y][x];
-      const px = x * cellSize; 
-      const py = y * cellSize; 
+   for (let i = 0; i < mazeMap.length; i++) {
+    for (let j = 0; j < mazeMap[i].length; j++) {
+      const c = mazeMap[i][j];
+      const x = j * cellSize; 
+      const y = i * cellSize; 
       if(!c.n){ 
         ctx.beginPath();
-        ctx.moveTo(px,py);
-        ctx.lineTo(px+cellSize,py); 
+        ctx.moveTo(x,y);
+        ctx.lineTo(x+cellSize,y); 
         ctx.stroke();
      }
       if(!c.s){ 
         ctx.beginPath();
-         ctx.moveTo(px,py+cellSize); 
-         ctx.lineTo(px+cellSize,py+cellSize); 
+         ctx.moveTo(x,y+cellSize); 
+         ctx.lineTo(x+cellSize,y+cellSize); 
          ctx.stroke(); 
         }
       if(!c.e){ 
         ctx.beginPath();
-        ctx.moveTo(px+cellSize,py); 
-        ctx.lineTo(px+cellSize,py+cellSize); 
+        ctx.moveTo(x+cellSize,y); 
+        ctx.lineTo(x+cellSize,y+cellSize); 
         ctx.stroke(); }
       if(!c.w){
         ctx.beginPath();
-        ctx.moveTo(px,py); 
-        ctx.lineTo(px,py+cellSize);
+        ctx.moveTo(x,y); 
+        ctx.lineTo(x,y+cellSize);
         ctx.stroke(); 
         }
     }
@@ -253,10 +253,10 @@ function replay(){
 function makeMaze(){
   createMaze(difficulty,difficulty);
   playerX=startCoord.x; playerY=startCoord.y; hasWon=false; moves=0;
-  let ctx = document.getElementById("mazeCanvas").getContext("2d");
+  let context = document.getElementById("mazeCanvas").getContext("2d");
   cellSize=document.getElementById("mazeCanvas").width/difficulty;
-  drawMaze(ctx);
-  drawPlayer(ctx);
+  drawMaze(context);
+  drawPlayer(context);
 }
 window.addEventListener("keydown", function(e) {
   if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(e.key)){
