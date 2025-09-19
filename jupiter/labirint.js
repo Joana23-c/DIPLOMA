@@ -13,21 +13,9 @@ let sprite = new Image();
 sprite.src ="./images/key.png";
 let endImg = new Image();
 endImg.src = "./images/home.png";
-// ctx = document.getElementById("mazeCanvas").getContext("2d")
 
 window.onload = function() {
   run();
-  // let view = document.getElementById("view");
-  // let viewWidth = view.offsetWidth;
-  // let viewHeight = view.offsetHeight;
-
-  //   if (viewHeight < viewWidth) {
-  //     ctx.canvas.width = viewHeight - viewHeight / 100;
-  //     ctx.canvas.height = viewHeight - viewHeight / 100;
-  //   } else {
-  //     ctx.canvas.width = viewWidth - viewWidth / 100;
-  //     ctx.canvas.height = viewWidth - viewWidth / 100;
-  //   }
   makeMaze();      
 };
   
