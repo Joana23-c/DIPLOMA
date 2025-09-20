@@ -23,27 +23,26 @@ $angry = intval($_POST['angry']);
 $neutral = intval($_POST['neutral']);
 $surprised = intval($_POST['surprised']);
 
-// Vendos game_id bazuar në difficulty
+// Vendos game_id bazuar ne difficulty
 if ($difficulty === 10) {
     $game_id = 3;
 } else if ($difficulty === 15) {
     $game_id = 4;
 } else {
-    $game_id = 3; // default nëse nuk është 10 ose 15
+    $game_id = 3; // default 
 }
 
-// Këtu po ruajme coins dhe score si NULL, nëse ke vlera vendose ti në POST dhe trajto si duhet
 $coins = NULL;
 $score = NULL;
 
-// Insert in games_history
+// Insert ne games_history
 $stmt1 = $conn->prepare("INSERT INTO games_history (game_id, user_id, data, coins, score, levizje) VALUES (?, ?, ?, ?, ?, ?)");
 $stmt1->bind_param("iisiii", $game_id, $user_id, $data, $coins, $score, $levizje);
 $stmt1->execute();
 $game_history_id = $stmt1->insert_id;
 $stmt1->close();
 
-// Insert in facial_expression_history
+// Insert ne facial_expression_history
 $stmt2 = $conn->prepare("INSERT INTO facial_expression_history (game_history_id, happy, sad, disgusted, angry, neutral, suprised) VALUES (?, ?, ?, ?, ?, ?, ?)");
 $stmt2->bind_param("iiiiiii", $game_history_id, $happy, $sad, $disgusted, $angry, $neutral, $surprised);
 $stmt2->execute();
