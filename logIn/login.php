@@ -23,15 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bind_result($user_id);
         $stmt->fetch();
 
-        // Ruaj në sesion
         $_SESSION['user_id'] = $user_id;
         $_SESSION['username'] = $username;
-        // echo "Login successful! Welcome, $username.";
-        // Këtu mund të nisësh sesionin nëse do
-        // 
-        // $_SESSION['username'] = $username;
             header("Location: ../SISTEMI DIELLOR/INDEX.php");
-        exit(); // shumë e rëndësishme pas header
+        exit(); 
     } else {
         echo "User not found.";
     }

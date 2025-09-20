@@ -24,14 +24,14 @@ $angry = $_POST['angry'];
 $neutral = $_POST['neutral'];
 $surprised = $_POST['surprised'];
 
-// Insert in games_history
+// Insert ne games_history
 $stmt1 = $conn->prepare("INSERT INTO games_history (game_id, user_id, data, coins, score, levizje) VALUES (?, ?, ?, ?, ?, NULL)");
 $stmt1->bind_param("iisii", $game_id, $user_id, $data, $coins, $score);
 $stmt1->execute();
 $game_history_id = $stmt1->insert_id;
 $stmt1->close();
 
-// Insert in facial_expression_history
+// Insert ne facial_expression_history
 $stmt2 = $conn->prepare("INSERT INTO facial_expression_history (game_history_id, happy, sad, disgusted, angry, neutral, suprised) VALUES (?, ?, ?, ?, ?, ?, ?)");
 $stmt2->bind_param("iiiiiii", $game_history_id, $happy, $sad, $disgusted, $angry, $neutral, $surprised);
 $stmt2->execute();

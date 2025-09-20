@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Register</title>
+    <head>
+        <title>Register</title>
          <style>
-        body {
+         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
             background-image: url("Purple_Nebula_08-1024x1024.png");
             background-size: cover;
             background-repeat: no-repeat;
@@ -17,7 +16,6 @@
 
         .container {
             width: 30vw;
-           
             margin-left: 35vw;
             margin-top: 14vh;
             padding: 20px;
@@ -81,22 +79,53 @@
             color: #ffffff;
         }
     </style>
-</head>
+    </head>
 <body>
     <div class="container">
     <h2>Register</h2>
-    <form action="register.php" method="POST">
-        <input type="text" name="username" placeholder="Username" required>
+    <form action="register.php" method="POST" onsubmit="return validate()">
+        <input type="text" id="usernm" name="username" placeholder="Username" required>
         <p>Gender:</p>
         <label >Female</label>
         <input type="radio" name="gender" value="F" checked> <br>
         <label>Male</label>
         <input type="radio" name="gender" value="M">
-        <input type="number" name="age" placeholder="Mosha" required><br>
+        <input type="number" id="mosha" name="age" placeholder="Mosha" required><br>
 
-        <button type="submit">Register</button>
+        <button type="submit" >Register</button>
     </form>
     <p>Already have an account? <a href="login.html">Login</a></p>
  </div>
 </body>
+<script>
+  function validate(){
+    let username = document.getElementById("usernm").value.trim();
+    let age =  document.getElementById("mosha").value.trim();
+
+
+    if(!userNamemcheck(username)){
+        window.alert("Username i pavlefshem! Nuk duhet te kete hapesira dhe duhet te filloje me shkronje ose numer.");
+        return false;
+    }
+
+    if(!agenr(age) || Number(age)<5 || Number(age)>100){
+        window.alert("Mosha duhet te jete numer midis 5 dhe 100.");
+        return false;
+    }
+
+    return true;
+ 
+}
+
+
+    function userNamemcheck(str) {
+    return /^[a-zA-Z0-9]\S*$/.test(str);
+}
+function agenr(str){
+    return /^[0-9]+$/.test(str);
+}
+
+
+ 
+</script>
 </html>
