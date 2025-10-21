@@ -20,11 +20,12 @@ if (!isset($_SESSION['user_id'])) {
     <div class="sun">
       <a href="#"><img src="./images/sun.png" alt="Sun"></a>
     </div>
-<div class="mercury">
-  <a href="#">
-    <img src="./images/mercury.png" alt="Mercury">
-  </a>
-</div>
+    
+    <div class="mercury">
+      <a href="#">
+         <img src="./images/mercury.png" alt="Mercury">
+        </a>
+    </div>
     <div class="venus">
       <a href="#"><img src="./images/venus.png" alt="Venus"></a>
     </div>

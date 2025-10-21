@@ -203,7 +203,7 @@ if (frame.y > framey) {
 //    velocityx = -6;
 //  }
  
- if(coins >= 20){ //150
+ if(coins >= 30){ //150
     context.fillStyle = "red";
     context.font = "25px courier";
     context.fillText("Ti fitove !", 300, 125);
@@ -379,7 +379,6 @@ const run = async()=>{
     await Promise.all([
         faceapi.nets.ssdMobilenetv1.loadFromUri('../face-api-js-starter-main/public/models'),
         faceapi.nets.faceLandmark68Net.loadFromUri('../face-api-js-starter-main/public/models'),
-        faceapi.nets.faceRecognitionNet.loadFromUri('../face-api-js-starter-main/public/models'),
         faceapi.nets.ageGenderNet.loadFromUri('../face-api-js-starter-main/public/models'),
         faceapi.nets.faceExpressionNet.loadFromUri('../face-api-js-starter-main/public/models')
     ]);
@@ -399,7 +398,6 @@ const run = async()=>{
    setInterval(async () => {
   let faceAIData = await faceapi.detectSingleFace(videoFeedEl)
     .withFaceLandmarks()
-    .withFaceDescriptor()
     .withAgeAndGender()
     .withFaceExpressions();
      console.log(faceAIData)

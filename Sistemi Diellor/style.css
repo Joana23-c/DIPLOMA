@@ -17,7 +17,6 @@ body {
   position: relative;
 }
 
-/* Qendra e orbitave: qendra e container-it (40em/2 = 20em) */
 .sun {
   position: absolute;
   top: 18em;   

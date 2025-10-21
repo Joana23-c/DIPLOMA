@@ -253,7 +253,7 @@ if (frame.y > framey) {
 
  }
 
- if(coins == 30){//300
+ if(coins == 300){//300
     context.fillStyle = "navy";
     context.font = "25px courier";
     context.fillText("Ti fitove !", 300, 125); 
