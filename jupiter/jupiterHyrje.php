@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
 </p>
         <button onclick="location.href='labirint.php'">Luaj</button>
                 <button onclick="location.href='jupiterInfo.html'">Zbulo terrenin</button>
-        <button onclick="location.href='../SISTEMI DIELLOR/INDEX.php'">Kthehu</button>
+        <button onclick="location.href='../Sistemi Diellor/index.php'">Kthehu</button>
     </div>
 </body>
 </html>
