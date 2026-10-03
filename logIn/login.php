@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $_SESSION['user_id'] = $user_id;
         $_SESSION['username'] = $username;
-            header("Location: ../SISTEMI DIELLOR/INDEX.php");
+            header("Location: ../SISTEMI DIELLOR/index.php");
         exit(); 
     } else {
         echo "User not found.";
