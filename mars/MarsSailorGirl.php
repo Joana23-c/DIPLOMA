@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
         <p>Misioni i planetit të kuq!<br><br> Sailor Girl është në një mision për të shpëtuar Sistemin Diellor nga alienet nga galaktika  M33  që duan të shkatërrojnë njerëzimin.<br><br> Për ta bërë këtë asaj në fillim i duhet të mbledhë të gjitha sendet dhe paisjet që i duhen nga planetë të ndryshme për të patur fuqitë e duhura për tu përballur me armiqtë. Si fillim ajo duhet të mbledhe 150 coin nga planeti mars për të mundur të shkojë në planetin tjetër.</p>
         <button onclick="location.href='SailorGame.php'">Luaj</button>
                 <button onclick="location.href='marsInfo.html'">Zbulo terrenin</button>
-        <button onclick="location.href='../SISTEMI DIELLOR/INDEX.php'">Kthehu</button>
+        <button onclick="location.href='../SISTEMI DIELLOR/index.php'">Kthehu</button>
     </div>
 </body>
 </html>
