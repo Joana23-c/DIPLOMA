@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$host = 'localhost';
-$db = 'database';
-$user = 'root';
-$pass = '';
+$host = 'sql210.infinityfree.com';
+$db   = 'if0_43080092_diploma';
+$user = 'if0_43080092';
+$pass = 'oy5SfEpo6U';
 
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
